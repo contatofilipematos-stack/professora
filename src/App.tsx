@@ -138,10 +138,15 @@ export default function App() {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="flex flex-col items-center gap-8 w-full max-w-2xl px-4"
         >
-          <button className="w-full md:w-auto bg-brand-pink hover:bg-brand-pink/90 active:scale-95 text-white px-8 md:px-14 py-5 md:py-7 rounded-[2rem] font-black text-xl md:text-3xl shadow-[0_20px_60px_rgba(255,107,139,0.3)] hover:shadow-[0_25px_80px_rgba(255,107,139,0.4)] transition-all flex items-center justify-center gap-4 cursor-pointer group tracking-tight">
+          <a 
+            href="https://pay.lowify.com.br/checkout.php?product_id=ImZoQR"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full md:w-auto bg-brand-pink hover:bg-brand-pink/90 active:scale-95 text-white px-8 md:px-14 py-5 md:py-7 rounded-[2rem] font-black text-xl md:text-3xl shadow-[0_20px_60px_rgba(255,107,139,0.3)] hover:shadow-[0_25px_80px_rgba(255,107,139,0.4)] transition-all flex items-center justify-center gap-4 cursor-pointer group tracking-tight"
+          >
             Quero meu kit por R$17,90
             <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform shrink-0" />
-          </button>
+          </a>
           
           <div className="flex flex-col items-center gap-4">
              <div className="flex items-center gap-2 text-text-muted font-bold text-base md:text-xl">
@@ -718,9 +723,14 @@ export default function App() {
               </ul>
 
               <div className="space-y-4">
-                <button className="w-full bg-brand-teal hover:bg-brand-teal/90 text-white py-6 md:py-8 rounded-[2.5rem] text-xl md:text-2xl font-black shadow-lg hover:shadow-xl transition-all active:scale-95 cursor-pointer">
+                <a 
+                  href="https://pay.lowify.com.br/checkout.php?product_id=ImZoQR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-brand-teal hover:bg-brand-teal/90 text-white py-6 md:py-8 rounded-[2.5rem] text-xl md:text-2xl font-black shadow-lg hover:shadow-xl transition-all active:scale-95 cursor-pointer flex items-center justify-center"
+                >
                   Quero o Kit Essencial
-                </button>
+                </a>
               </div>
             </motion.div>
 
@@ -789,9 +799,14 @@ export default function App() {
                 </ul>
 
                 <div className="space-y-6">
-                  <button className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white py-8 md:py-10 rounded-[3rem] text-xl md:text-3xl font-black shadow-[0_20px_50px_rgba(99,102,241,0.4)] hover:shadow-[0_25px_70px_rgba(99,102,241,0.5)] transition-all active:scale-95 flex items-center justify-center gap-4 cursor-pointer">
+                  <a 
+                    href="https://pay.lowify.com.br/checkout.php?product_id=ImZoQR"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white py-8 md:py-10 rounded-[3rem] text-xl md:text-3xl font-black shadow-[0_20px_50px_rgba(99,102,241,0.4)] hover:shadow-[0_25px_70px_rgba(99,102,241,0.5)] transition-all active:scale-95 flex items-center justify-center gap-4 cursor-pointer"
+                  >
                     🎯 Quero o Combo Completo
-                  </button>
+                  </a>
                   <p className="flex items-center justify-center gap-3 text-text-muted text-sm font-black text-center uppercase tracking-widest opacity-60">
                     <ShieldCheck className="w-5 h-5 text-brand-teal" />
                     Compra 100% Segura · 7 Dias de Garantia
