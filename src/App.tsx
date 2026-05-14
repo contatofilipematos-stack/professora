@@ -5,8 +5,178 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Star, Pencil, BookOpen, Download, ArrowRight, Sparkles, Search, Frown, Clock, BookX, CheckCircle2, GraduationCap, CalendarCheck, Layers, TrendingUp, Palette, FileText, Book, Printer, Smile, ClipboardCheck, BarChart3, CalendarDays, BookOpenCheck, FileEdit, Gift, Lock, ShieldCheck, ChevronDown, Shield } from "lucide-react";
+import { 
+  Star, 
+  ArrowRight, 
+  Sparkles, 
+  CheckCircle2, 
+  Download, 
+  ShieldCheck, 
+  ChevronDown, 
+  Clock, 
+  BookOpen, 
+  Smile, 
+  Zap, 
+  Users,
+  Shield,
+  Award,
+  Files,
+  Gift,
+  CalendarDays,
+  ClipboardCheck,
+  Palette,
+  Pencil,
+  FileText,
+  BookCheck
+} from "lucide-react";
 import { saveUTMs, appendUTMs } from "./lib/utm";
+
+const testimonials = [
+  {
+    name: "Profa. Ana Márcia",
+    role: "Fundamental I",
+    image: "https://i.ibb.co/B2dpP09b/images.jpg",
+    text: "Material de extrema qualidade. As atividades são inteligentes e realmente prendem a atenção dos pequenos. Recomendo muito!"
+  },
+  {
+    name: "Juliana Ribeiro",
+    role: "2º e 3º Ano",
+    image: "https://i.ibb.co/cc9BTc0b/download.jpg",
+    text: "Meus domingos voltaram a ser de lazer. É só abrir o PDF, escolher e imprimir. O alinhamento com a BNCC facilita tudo na escola."
+  },
+  {
+    name: "Sandra G. Lira",
+    role: "Ensino Fundamental",
+    image: "https://i.ibb.co/JFSYDBkF/36eac3c82596adfab2a9f4ce6a35345f.jpg",
+    text: "Os alunos adoraram os textos. São temas atuais que geram interesse imediato. Melhor investimento que fiz para minhas aulas este ano."
+  }
+];
+
+const faqs = [
+  {
+    question: "Como recebo o material?",
+    answer: "O acesso é imediato! Assim que o pagamento for confirmado, você receberá um e-mail com o link para baixar tudo em PDF. Rápido e prático."
+  },
+  {
+    question: "O material está atualizado com a BNCC?",
+    answer: "Sim, 100%. Todas as atividades foram desenvolvidas seguindo rigorosamente as competências e habilidades da BNCC para o Ensino Fundamental."
+  },
+  {
+    question: "Posso imprimir quantas vezes quiser?",
+    answer: "Sim! O acesso é vitalício. Você baixa o arquivo e ele é seu para sempre, podendo usar com diferentes turmas ao longo dos anos."
+  },
+  {
+    question: "Serve para qual série?",
+    answer: "O material é completo e abrange do 1º ao 5º ano do Ensino Fundamental, com níveis de dificuldade progressivos."
+  }
+];
+
+const bonusItems = [
+  {
+    title: "Fluência Leitora",
+    tag: "BÔNUS 1",
+    desc: "Um pack focado em acelerar a velocidade e compreensão de leitura dos seus alunos com exercícios dinâmicos.",
+    iconName: "BookOpen"
+  },
+  {
+    title: "Gêneros Textuais BNCC",
+    tag: "BÔNUS 2",
+    desc: "Atividades específicas para trabalhar todos os gêneros exigidos pela BNCC, do 1º ao 5º ano.",
+    iconName: "FileText"
+  },
+  {
+    title: "Escrita Criativa",
+    tag: "BÔNUS 3",
+    desc: "Estimule a imaginação com propostas de redação e produção textual que os alunos adoram fazer.",
+    iconName: "Pencil"
+  }
+];
+
+const insideItems = [
+  { title: "267+ Atividades", iconName: "Files", desc: "Interpretação e produção de texto." },
+  { title: "Gabarito Incluso", iconName: "CheckCircle2", desc: "Para correção rápida e sem erros." },
+  { title: "Download em PDF", iconName: "Download", desc: "Arquivo organizado e pronto para imprimir." },
+  { title: "Acesso Vitalício", iconName: "Award", desc: "O material é seu para sempre." },
+  { title: "Envio Imediato", iconName: "Zap", desc: "Receba tudo no seu e-mail agora." },
+];
+
+const pulseVariants = {
+  animate: {
+    scale: [1, 1.02, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const benefitItems = [
+  {
+    iconName: "Clock",
+    title: "Economia de Tempo",
+    desc: "Planejamento que duraria horas agora é feito em segundos. É só escolher, imprimir e aplicar.",
+    color: "bg-blue-50 text-blue-600"
+  },
+  {
+    iconName: "Zap",
+    title: "Engajamento Real",
+    desc: "Textos selecionados que despertam a curiosidade e fazem os alunos quererem ler de verdade.",
+    color: "bg-rose-50 text-rose-600"
+  },
+  {
+    iconName: "ShieldCheck",
+    title: "Segurança Pedagógica",
+    desc: "Material estruturado, com gabarito e totalmente alinhado às diretrizes da BNCC.",
+    color: "bg-emerald-50 text-emerald-600"
+  }
+];
+
+const profileAvatars = [
+  "https://i.ibb.co/B2dpP09b/images.jpg",
+  "https://i.ibb.co/cc9BTc0b/download.jpg",
+  "https://i.ibb.co/gFQmn1h0/images.jpg",
+  "https://i.ibb.co/ZzRNcKM3/download.jpg",
+  "https://i.ibb.co/JFSYDBkF/36eac3c82596adfab2a9f4ce6a35345f.jpg"
+];
+
+const sampleImages = [
+  "https://i.ibb.co/v4MpVCyN/amostra-1-Bb7-Emq4-H.png",
+  "https://i.ibb.co/Z6cpC5wC/amostra-2-DCxhnge-K.png",
+  "https://i.ibb.co/60VCxxZq/amostra-3-9l1116-Mc.png",
+  "https://i.ibb.co/dJm2H94V/amostra-4-Dy-R6x8un.png",
+  "https://i.ibb.co/BktMGVb/amostra-5-Bk62-Jw-BK.png",
+  "https://i.ibb.co/GfYNwBXB/amostra-6-C9-SVogpo.png",
+  "https://i.ibb.co/v4MpVCyN/amostra-1-Bb7-Emq4-H.png",
+  "https://i.ibb.co/Z6cpC5wC/amostra-2-DCxhnge-K.png",
+];
+
+const IconMap: Record<string, any> = {
+  BookOpen,
+  FileText,
+  Pencil,
+  Files,
+  CheckCircle2,
+  Download,
+  Award,
+  Zap,
+  Clock,
+  ShieldCheck,
+  Star,
+  ArrowRight,
+  Sparkles,
+  Shield,
+  Smile,
+  ChevronDown,
+  Gift
+};
+
+function DynamicIcon({ name, size, className }: { name: string; size?: number; className?: string }) {
+  const Icon = IconMap[name];
+  if (!Icon) return null;
+  return <Icon size={size} className={className} />;
+}
+
 
 export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -15,912 +185,430 @@ export default function App() {
     saveUTMs();
   }, []);
 
-  const faqs = [
-    {
-      question: "Como recebo o material?",
-      answer: "O acesso é imediato! Assim que o seu pagamento for confirmado, você receberá um e-mail com o link para download de todos os arquivos em PDF. Você também terá acesso à nossa área de membros exclusiva."
-    },
-    {
-      question: "Precisa de impressora especial?",
-      answer: "Não! Os arquivos foram otimizados para funcionar em qualquer impressora doméstica ou profissional. Você pode imprimir colorido para um resultado vibrante ou em preto e branco para economizar tinta — as atividades continuam lindas e legíveis."
-    },
-    {
-      question: "Por quanto tempo tenho acesso?",
-      answer: "O seu acesso é vitalício! Uma vez adquirido, o material é seu para sempre. Você pode baixar e imprimir quantas vezes precisar ao longo dos anos, para diferentes turmas."
-    },
-    {
-      question: "Posso usar em mais de uma turma?",
-      answer: "Sim! O material foi desenvolvido para ser flexível e atender do 1º ao 5º ano do Ensino Fundamental. Você pode adaptar as atividades conforme o nível de cada turma ou aluno individualmente."
-    }
-  ];
+  const checkoutUrl = appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR");
 
   return (
-    <div id="hero-container" className="min-h-screen bg-soft-rose bg-dots selection:bg-brand-pink/30 font-sans overflow-x-hidden relative text-text-dark pb-20">
-      {/* Decorative Floating Elements */}
-      <div className="absolute top-12 left-8 text-brand-amber/40 rotate-12 opacity-30 hidden lg:block select-none">
-        <Pencil size={56} />
-      </div>
-      <div className="absolute top-12 right-12 text-brand-amber/40 -rotate-12 opacity-30 hidden lg:block select-none">
-        <Star size={52} fill="currentColor" />
-      </div>
-      <div className="absolute bottom-40 left-12 text-brand-indigo/30 rotate-12 opacity-20 hidden lg:block select-none">
-        <BookOpen size={48} />
-      </div>
-      <div className="absolute bottom-40 right-16 text-brand-pink/30 -rotate-6 opacity-20 hidden lg:block select-none">
-        <Pencil size={40} />
-      </div>
-
-      <main className="relative z-10 max-w-6xl mx-auto px-6 pt-16 md:pt-24 pb-20 flex flex-col items-center text-center border-b border-brand-pink/5">
-        {/* Top Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full shadow-sm mb-12 border border-brand-pink/10"
-        >
-          <Sparkles size={18} className="text-brand-pink" />
-          <span className="text-xs md:text-sm font-bold text-brand-pink uppercase tracking-[0.15em] font-sans">
-            +500 professoras já baixaram
-          </span>
-        </motion.div>
-
-        {/* Heading Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-10 max-w-4xl"
-        >
-          <h1 className="text-4xl md:text-7xl font-black text-text-dark leading-[1.1] md:leading-[1.1] mb-8 tracking-tight">
-            267+ atividades de interpretação e produção de texto
-          </h1>
-          
-          <div className="flex flex-col items-center">
-            <div className="w-16 h-1.5 bg-brand-pink rounded-full mb-8 opacity-50" />
+    <div className="min-h-screen bg-[#fafafa] font-sans text-text-dark selection:bg-brand-indigo/10">
+      {/* --- 1. HERO SECTION --- */}
+      <header className="relative pt-16 pb-24 md:pt-28 md:pb-36 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f0f9ff_0%,_transparent_50%)] -z-10" />
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 bg-brand-pink/10 text-brand-pink px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-8">
+              <Sparkles size={14} />
+              <span>Material Premium para Professores</span>
+            </div>
             
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <span className="text-4xl md:text-7xl font-black text-brand-pink relative leading-none">
-                do 1º ao 5º
-                <span className="absolute -bottom-2 md:-bottom-3 left-0 w-full h-3 md:h-5 bg-brand-pink/10 -z-10 rounded-sm" />
-              </span>
-              <span className="text-4xl md:text-7xl font-black text-text-dark leading-none">
-                ano
-              </span>
-              
-              {/* Stack of Icons/Books */}
-              <div className="flex items-center ml-2 space-x-[-12px]">
-                <div className="w-10 h-10 md:w-14 md:h-14 bg-brand-teal rounded-xl shadow-lg transform -rotate-12 border-2 border-white flex items-center justify-center">
-                  <BookOpen className="text-white opacity-60" size={20} />
+            <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-8">
+              Recupere seus domingos e <span className="text-brand-indigo">encante</span> sua turma.
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-text-muted mb-12 leading-relaxed font-medium">
+              Dê adeus às horas de planejamento. Tenha em mãos <span className="text-text-dark font-bold">267+ atividades</span> de interpretação prontas para imprimir, alinhadas à BNCC.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-5 items-center">
+              <motion.a 
+                href="#planos"
+                variants={pulseVariants}
+                animate="animate"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-12 py-6 rounded-full font-black text-xl shadow-premium transition-all flex items-center justify-center text-center"
+              >
+                QUERO ACESSAR AGORA
+              </motion.a>
+              <div className="flex flex-col">
+                <div className="flex -space-x-2">
+                  {profileAvatars.map((url, i) => (
+                    <img 
+                      key={i} 
+                      src={url} 
+                      alt={`Professor ${i + 1}`}
+                      className="w-10 h-10 rounded-full border-2 border-white object-cover bg-slate-200 shadow-sm" 
+                      referrerPolicy="no-referrer"
+                    />
+                  ))}
                 </div>
-                <div className="w-10 h-10 md:w-14 md:h-14 bg-brand-pink rounded-xl shadow-lg border-2 border-white flex items-center justify-center relative z-10 scale-110">
-                   <Star size={20} className="text-white fill-white" />
-                </div>
-                <div className="w-10 h-10 md:w-14 md:h-14 bg-brand-indigo rounded-xl shadow-lg transform rotate-12 border-2 border-white flex items-center justify-center">
-                   <Download className="text-white opacity-60" size={20} />
-                </div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-text-muted mt-2">+8.500 PROFESSORAS JÁ BAIXARAM</span>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-lg md:text-2xl text-text-muted max-w-3xl mb-16 leading-relaxed font-medium font-inter"
-        >
-          Material pronto para imprimir, cheio de textos que prendem e atividades que fazem os alunos pensar de verdade.
-        </motion.p>
-
-        {/* Main Image Container */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative w-full max-w-3xl px-4 mb-20 group"
-        >
-          <div className="bg-white p-2 md:p-3 rounded-[3rem] md:rounded-[4rem] shadow-[0_40px_100px_rgba(255,107,139,0.15)] border border-brand-pink/5 relative z-10">
-            <div className="overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem] bg-soft-rose">
-              <img
-                src="https://i.ibb.co/6c6r8sV2/criadora-D8-HSYWBF.jpg"
-                alt="Professora segurando atividades"
-                className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative lg:block"
+          >
+            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white bg-white">
+              <img 
+                src="https://i.ibb.co/6c6r8sV2/criadora-D8-HSYWBF.jpg" 
+                alt="Material Didático" 
+                className="w-full h-auto"
                 referrerPolicy="no-referrer"
               />
             </div>
-          </div>
-          {/* Floating Element */}
-          <div className="absolute -bottom-6 -right-1 z-20 bg-brand-indigo text-white p-6 rounded-[2.5rem] rotate-6 shadow-2xl hidden lg:flex items-center justify-center border-4 border-white transition-transform hover:rotate-0 hover:scale-110">
-            <Download size={32} />
-          </div>
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="flex flex-col items-center gap-8 w-full max-w-2xl px-4"
-        >
-          <a 
-            href={appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full md:w-auto bg-brand-pink hover:bg-brand-pink/90 active:scale-95 text-white px-8 md:px-14 py-5 md:py-7 rounded-[2rem] font-black text-xl md:text-3xl shadow-[0_20px_60px_rgba(255,107,139,0.3)] hover:shadow-[0_25px_80px_rgba(255,107,139,0.4)] transition-all flex items-center justify-center gap-4 cursor-pointer group tracking-tight"
-          >
-            Quero meu kit por R$17,90
-            <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform shrink-0" />
-          </a>
-          
-          <div className="flex flex-col items-center gap-4">
-             <div className="flex items-center gap-2 text-text-muted font-bold text-base md:text-xl">
-              <Download size={20} className="text-brand-pink animate-bounce" />
-              <span>Download imediato após a compra</span>
+            {/* Experience badge */}
+            <div className="absolute -bottom-8 -left-8 glass p-6 rounded-3xl shadow-premium z-20 hidden md:block">
+              <div className="flex items-center gap-4">
+                <div className="bg-brand-teal text-white p-3 rounded-2xl">
+                  <Award size={32} />
+                </div>
+                <div>
+                  <p className="text-xs font-black text-brand-teal uppercase">Qualidade</p>
+                  <p className="text-xl font-black">100% BNCC</p>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 bg-white/60 px-5 py-2 rounded-full backdrop-blur-sm border border-brand-pink/5">
-              <div className="flex -space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} fill="currentColor" className="text-brand-amber" />
-                ))}
-              </div>
-              <span className="text-[10px] md:text-xs font-black text-text-dark uppercase tracking-widest">+8.500 professoras amaram</span>
-            </div>
+          </motion.div>
+        </div>
+      </header>
+
+      {/* --- 2. BENEFITS SECTION --- */}
+      <section className="py-24 bg-white border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">O que você ganha ao garantir seu acesso hoje</h2>
+            <p className="text-xl text-text-muted font-medium">Mais do que atividades, entregamos tempo e tranquilidade para o seu dia a dia.</p>
           </div>
-        </motion.div>
-      </main>
 
-      {/* Second Section: The Pain Points */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-20">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-5xl font-black text-text-dark text-center mb-16 tracking-tight"
-        >
-          Por que encontrar atividades virou um desafio? 😫
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-          {[
-            {
-              title: "Textos genéricos",
-              text: "Você perde horas procurando e ainda não acha nada com qualidade pedagógica real.",
-              color: "bg-soft-rose",
-              icon: Search,
-              iconColor: "bg-brand-pink"
-            },
-            {
-              title: "Atividades que não engajam",
-              text: "Os alunos fazem por obrigação. Não há interpretação real, só cópia de trechos.",
-              color: "bg-soft-lavender",
-              icon: Frown,
-              iconColor: "bg-brand-indigo"
-            },
-            {
-              title: "Do zero toda semana",
-              text: "Montar atividade do zero consome a energia que você precisava para estar com a turma.",
-              color: "bg-soft-peach",
-              icon: Clock,
-              iconColor: "bg-brand-amber"
-            },
-            {
-              title: "Fora da BNCC",
-              text: "Material solto sem alinhamento curricular gera insegurança na hora de aplicar.",
-              color: "bg-soft-sage",
-              icon: BookX,
-              iconColor: "bg-brand-teal"
-            }
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`${item.color} p-8 md:p-10 rounded-[2.5rem] flex items-start gap-6 shadow-sm border border-white hover:shadow-xl transition-all group`}
-            >
-              <div className={`${item.iconColor} p-4 rounded-2xl shrink-0 shadow-lg group-hover:scale-110 transition-transform`}>
-                <item.icon className="text-white" size={28} />
-              </div>
-              <div>
-                <h3 className="text-xl md:text-2xl font-black text-text-dark mb-2">{item.title}</h3>
-                <p className="text-text-muted leading-relaxed font-medium font-inter">{item.text}</p>
-              </div>
-            </motion.div>
-          ))}
+          <div className="grid md:grid-cols-3 gap-10">
+            {benefitItems.map((benefit, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -10 }}
+                className="p-10 rounded-[2.5rem] bg-[#fdfdfd] border border-slate-100 shadow-sm hover:shadow-premium transition-all"
+              >
+                <div className={`${benefit.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm`}>
+                  <DynamicIcon name={benefit.iconName} size={32} />
+                </div>
+                <h3 className="text-2xl font-black mb-4">{benefit.title}</h3>
+                <p className="text-text-muted leading-relaxed font-medium">{benefit.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Third Section: Who is it for? */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-20 bg-white/50 backdrop-blur-md mt-20 rounded-[3rem] border border-white/60">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-5xl font-black text-text-dark text-center mb-16 tracking-tight"
-        >
-          Esse kit foi feito para você se... 🎯
-        </motion.h2>
+      {/* --- 3. SOCIAL PROOF (SNEAK PEEK) --- */}
+      <section className="py-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row items-end justify-between gap-8">
+          <div className="max-w-2xl">
+             <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight text-left">Dê uma olhada no que te espera...</h2>
+             <div className="flex items-center gap-2">
+                <div className="flex text-brand-amber">
+                   {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
+                </div>
+                <span className="text-sm font-black text-text-muted uppercase tracking-widest">+8.500 Professoras Satisfeitas</span>
+             </div>
+          </div>
+          <div className="flex gap-4">
+             <div className="p-4 rounded-full border border-slate-200 text-slate-400 hover:text-brand-indigo hover:border-brand-indigo transition-colors cursor-pointer hidden md:block">
+                <ChevronDown className="rotate-90" />
+             </div>
+             <div className="p-4 rounded-full border border-slate-200 text-slate-400 hover:text-brand-indigo hover:border-brand-indigo transition-colors cursor-pointer hidden md:block">
+                <ChevronDown className="-rotate-90" />
+             </div>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-          {[
-            "Quer atividades prontas sem gastar horas pesquisando no Google",
-            "Deseja que seus alunos desenvolvam leitura crítica de verdade",
-            "Precisa de material 100% alinhado à BNCC e organizado",
-            "Atende do 1º ao 5º ano e quer ter tudo em um só lugar",
-            "Está cansada de improvisar na véspera da aula",
-            "Busca economizar tempo com qualidade pedagógica impecável"
-          ].map((text, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/80 p-6 rounded-2xl md:rounded-3xl flex items-center gap-4 shadow-sm border-l-4 border-brand-pink border-t border-r border-b border-white"
+        <motion.div 
+           className="flex gap-6 px-6"
+           animate={{ x: [0, -1000] }}
+           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        >
+          {sampleImages.map((url, i) => (
+            <div key={i} className="flex-shrink-0 w-[300px] h-[420px] bg-white p-3 rounded-[2rem] shadow-xl border border-slate-100 overflow-hidden group">
+              <img src={url} className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+            </div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* --- 4. WHAT'S INSIDE --- */}
+      <section className="py-24 bg-slate-900 text-white rounded-[4rem] mx-4 md:mx-10 my-10 overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-indigo opacity-10 blur-3xl rounded-full translate-x-1/2" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <h2 className="text-3xl md:text-6xl font-black mb-16 tracking-tight">O que você estará baixando agora?</h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {insideItems.map((item, i) => (
+                <div key={i} className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-left">
+                  <div className="text-brand-indigo mb-6">
+                  <DynamicIcon name={item.iconName} size={40} />
+                </div>
+                  <h3 className="text-xl font-black mb-2">{item.title}</h3>
+                  <p className="text-slate-400 font-medium">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+        </div>
+      </section>
+
+      {/* --- BONUS SECTION --- */}
+      <section className="py-24 bg-brand-indigo/5 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 bg-brand-amber text-white px-5 py-2 rounded-full text-sm font-black uppercase tracking-widest mb-6 shadow-lg shadow-amber-200">
+              <Gift size={18} />
+              <span>Presentes Exclusivos</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">O que você ganha de bônus comprando HOJE</h2>
+            <p className="text-xl text-text-muted font-medium">Além das 267 atividades, preparamos recursos extras para facilitar ainda mais sua rotina.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {bonusItems.map((bonus, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.02 }}
+                className="bg-white p-10 rounded-[3rem] shadow-premium relative overflow-hidden group"
+              >
+                <div className="absolute top-0 right-0 p-4 bg-brand-amber/10 text-brand-amber font-black text-xs rounded-bl-2xl">
+                  GRÁTIS
+                </div>
+                <div className="text-brand-amber mb-6">
+                  <DynamicIcon name={bonus.iconName} className="w-10 h-10" />
+                </div>
+                <p className="text-xs font-black tracking-widest text-brand-amber mb-4 uppercase">{bonus.tag}</p>
+                <h3 className="text-2xl font-black mb-4">{bonus.title}</h3>
+                <p className="text-text-muted font-medium leading-relaxed">{bonus.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-20 text-center">
+            <motion.a 
+              href="#planos"
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex bg-brand-pink hover:bg-brand-pink/90 text-white px-12 py-6 rounded-full font-black text-xl shadow-premium transition-all"
             >
-              <div className="bg-brand-teal/10 p-2 rounded-full shrink-0">
-                <CheckCircle2 className="text-brand-teal" size={24} />
+              QUERO TODOS OS BÔNUS AGORA
+            </motion.a>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent" />
+      </section>
+
+      {/* --- TESTIMONIALS SECTION --- */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-20">
+            <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">O que dizem as professoras</h2>
+            <p className="text-lg text-text-muted font-medium">Quem já baixou e aplica em sala de aula todos os dias.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((t, i) => (
+              <div key={i} className="p-10 rounded-[3rem] bg-[#fafafa] border border-slate-100 flex flex-col h-full">
+                <div className="flex text-brand-amber mb-6">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                </div>
+                <p className="text-lg font-medium italic text-text-dark leading-relaxed mb-10 flex-grow">
+                  "{t.text}"
+                </p>
+                <div className="flex items-center gap-4 border-t border-slate-200 pt-8">
+                  <img src={t.image} alt={t.name} className="w-14 h-14 rounded-full object-cover shadow-sm bg-slate-200" referrerPolicy="no-referrer" />
+                  <div>
+                    <p className="font-black text-text-dark">{t.name}</p>
+                    <p className="text-xs font-black uppercase tracking-widest text-text-muted">{t.role}</p>
+                  </div>
+                </div>
               </div>
-              <p className="text-text-dark font-bold text-base md:text-xl leading-snug font-inter">
-                {text}
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- 5. OFFER SECTION (RE-DESIGNED CARDS) --- */}
+      <section id="planos" className="py-32 bg-[#fafafa]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">Comece agora mesmo</h2>
+            <p className="text-xl text-text-muted font-medium">Invista na sua carreira e na qualidade das suas aulas com um valor simbólico.</p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch max-w-6xl mx-auto">
+            {/* Standard Tier */}
+            <motion.div 
+               whileHover={{ y: -5 }}
+               className="bg-white rounded-[3rem] p-10 md:p-14 border border-slate-200 flex flex-col items-center text-center shadow-sm relative overflow-hidden"
+            >
+              <div className="mb-10">
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-4 block">Kit Essencial</span>
+                <p className="text-text-muted line-through font-bold text-lg mb-2">De R$19,90</p>
+                <div className="flex items-center justify-center gap-1">
+                  <span className="text-4xl font-black">R$</span>
+                  <span className="text-8xl font-black tracking-tighter">9,90</span>
+                </div>
+              </div>
+
+              <div className="space-y-4 mb-12 w-full text-left">
+                {[
+                  "267+ Atividades (1º ao 5º ano)",
+                  "PDF Pronto para Imprimir",
+                  "Gabarito Completo",
+                  "Ficha de Progresso Individual",
+                  "Acesso Vitalício"
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle2 size={18} className="text-brand-teal" />
+                    <span className="font-bold text-slate-600">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <motion.a 
+                href={checkoutUrl}
+                variants={pulseVariants}
+                animate="animate"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-slate-900 border-2 border-slate-900 hover:bg-slate-800 text-white py-6 rounded-full font-black text-xl transition-all flex items-center justify-center"
+              >
+                RECEBER MATERIAL COMPLETO
+              </motion.a>
+              <p className="mt-6 text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                 <Shield size={14} /> Pagamento 100% Seguro
               </p>
             </motion.div>
-          ))}
-        </div>
-      </section>
 
-      {/* Fourth Section: Freedom/Benefits */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-5xl font-black text-text-dark text-center mb-16 tracking-tight"
-        >
-          Não é só material. É a sua liberdade de volta. 🕊️
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {[
-            {
-              title: "267+ atividades prontas",
-              desc: "Interpretação e produção de texto para o ano inteiro — sem improvisar.",
-              color: "bg-soft-sage",
-              icon: GraduationCap,
-              iconColor: "bg-brand-teal"
-            },
-            {
-              title: "Textos que prendem",
-              desc: "Selecionados para cada faixa etária, com perguntas que desenvolvem o raciocínio.",
-              color: "bg-soft-peach",
-              icon: CalendarCheck,
-              iconColor: "bg-brand-amber"
-            },
-            {
-              title: "Do 1º ao 5º ano",
-              desc: "Material completo para quem atende mais de uma turma ou quer ter tudo em mãos.",
-              color: "bg-soft-rose",
-              icon: Layers,
-              iconColor: "bg-brand-pink"
-            },
-            {
-              title: "Pronto para imprimir",
-              desc: "PDF editável, funciona em qualquer impressora, colorido ou preto e branco.",
-              color: "bg-soft-lavender",
-              icon: TrendingUp,
-              iconColor: "bg-brand-indigo"
-            }
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`${item.color} p-8 rounded-[2.5rem] flex items-start gap-6 shadow-sm border border-white group hover:shadow-xl transition-all`}
+            {/* Premium Tier */}
+            <motion.div 
+               whileHover={{ y: -5 }}
+               className="bg-white rounded-[3rem] p-10 md:p-14 border-4 border-brand-indigo flex flex-col items-center text-center shadow-premium relative overflow-hidden group"
             >
-              <div className={`${item.iconColor} p-4 rounded-2xl shrink-0 shadow-lg group-hover:scale-110 transition-transform`}>
-                <item.icon className="text-white" size={28} />
+              <div className="absolute top-0 right-0 bg-brand-indigo text-white px-6 py-2 rounded-bl-3xl font-black text-xs uppercase tracking-widest">
+                MAIS ESCOLHIDO
               </div>
-              <div>
-                <h3 className="text-xl md:text-2xl font-black text-text-dark mb-2">{item.title}</h3>
-                <p className="text-text-muted leading-relaxed font-semibold font-inter">{item.desc}</p>
+              
+              <div className="mb-10">
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-indigo mb-4 block">Combo Mestre do Texto</span>
+                <p className="text-text-muted line-through font-bold text-lg mb-2">De R$29,90</p>
+                <div className="flex items-center justify-center gap-1">
+                  <span className="text-4xl font-black text-brand-indigo">R$</span>
+                  <span className="text-8xl font-black tracking-tighter text-brand-indigo">19,90</span>
+                </div>
+                <div className="mt-4 inline-block bg-brand-amber/10 text-brand-amber px-4 py-1 rounded-full text-xs font-black">
+                   ECONOMIZE R$10,00 HOJE
+                </div>
+              </div>
+
+              <div className="space-y-4 mb-12 w-full text-left">
+                <div className="flex items-center gap-3 pb-4 mb-4 border-b border-indigo-50">
+                   <div className="p-2 rounded-xl bg-brand-indigo text-white">
+                      <Zap size={20} />
+                   </div>
+                   <span className="font-black text-brand-indigo">Tudo do Kit Essencial +</span>
+                </div>
+                {[
+                  "Pack: Fluência Leitora (Focado)",
+                  "Pack: Gêneros Textuais BNCC",
+                  "Atividades de Escrita Criativa",
+                  "Certificado de Conclusão",
+                  "Prioridade no Suporte"
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle2 size={18} className="text-brand-indigo" />
+                    <span className="font-bold text-slate-800">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <motion.a 
+                href={checkoutUrl}
+                variants={pulseVariants}
+                animate="animate"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-brand-indigo hover:bg-brand-indigo/95 text-white py-6 rounded-full font-black text-xl transition-all flex items-center justify-center shadow-lg shadow-indigo-200"
+              >
+                GARANTIR ACESSO PREMIUM
+              </motion.a>
+              <div className="mt-6 flex flex-col items-center gap-3">
+                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <ShieldCheck size={14} className="text-brand-teal" /> Garantia de 7 Dias Incondicional
+                 </p>
               </div>
             </motion.div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* Fifth Section: Specific Kits */}
-      <section className="relative z-10 py-24 bg-soft-peach bg-stars">
+      {/* --- 6. FAQ & TRUST --- */}
+      <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl md:text-5xl font-black text-text-dark text-center mb-16 tracking-tight"
-          >
-            Um kit completo para cada nível ✏️
-          </motion.h2>
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight">Ainda com dúvida?</h2>
+          </div>
 
-          <div className="flex flex-col gap-6">
-            {[
-              { title: "Kit 1º Ano", text: "Textos curtos com questões de interpretação e produção para quem está começando a ler.", color: "text-brand-indigo", bg: "bg-soft-lavender", icon: Book },
-              { title: "Kit 2º Ano", text: "Atividades de compreensão mais elaboradas e escrita criativa com suporte visual.", color: "text-brand-teal", bg: "bg-soft-sage", icon: Book },
-              { title: "Kit 3º Ano", text: "Interpretação aprofundada, produção argumentativa e desafios de escrita.", color: "text-brand-amber", bg: "bg-soft-peach", icon: Book },
-              { title: "Kit 4º Ano", text: "Textos mais longos, inferência e produção textual com começo, meio e fim.", color: "text-brand-pink", bg: "bg-soft-rose", icon: Book },
-              { title: "Kit 5º Ano", text: "Interpretação avançada, gêneros variados e produção argumentativa.", color: "text-indigo-600", bg: "bg-indigo-50", icon: Book },
-              { title: "Visual Encantador", text: "Ilustrações que engajam e motivam — pronto para imprimir e aplicar.", color: "text-rose-500", bg: "bg-rose-50", icon: Palette },
-              { title: "PDF Inteligente", text: "Personalize se quiser, ou imprima direto do jeito que está.", color: "text-slate-500", bg: "bg-slate-50", icon: FileText }
-            ].map((item, index) => (
-              <motion.div
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`${item.bg} p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex items-center gap-6 shadow-sm border border-white group hover:shadow-xl transition-all`}
+                className="bg-[#fafafa] rounded-2xl border border-slate-100 overflow-hidden"
               >
-                <div className={`${item.color} p-4 rounded-xl md:rounded-2xl shrink-0 group-hover:scale-110 transition-transform bg-white/80`}>
-                  <item.icon size={32} className="relative z-10" />
-                </div>
-                <div className="text-left">
-                  <h3 className="text-lg md:text-2xl font-black text-text-dark mb-1">{item.title}</h3>
-                  <p className="text-text-muted text-sm md:text-base leading-relaxed font-semibold font-inter">
-                    {item.text}
-                  </p>
-                </div>
-              </motion.div>
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-slate-100/50 transition-colors"
+                >
+                  <span className="text-lg font-black">{faq.question}</span>
+                  <motion.div
+                    animate={{ rotate: openFaq === index ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-brand-indigo"
+                  >
+                    <ChevronDown size={24} />
+                  </motion.div>
+                </button>
+                <AnimatePresence>
+                  {openFaq === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                    >
+                      <div className="px-8 pb-6 text-text-muted font-medium pt-2">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </div>
+
+          <div className="mt-32 p-12 rounded-[3.5rem] bg-indigo-50 border-2 border-indigo-100 text-center relative overflow-hidden group">
+             <div className="absolute top-0 left-0 w-2 h-full bg-brand-indigo" />
+             <div className="relative z-10">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 mx-auto shadow-sm">
+                   <Smile size={32} className="text-brand-indigo" />
+                </div>
+                <h3 className="text-2xl font-black mb-4">Seu risco é zero!</h3>
+                <p className="text-text-muted font-medium leading-relaxed max-w-xl mx-auto">
+                   Se por qualquer motivo você não gostar do material em até 7 dias, nós devolvemos 100% do seu dinheiro. Transparência total.
+                </p>
+             </div>
+          </div>
         </div>
       </section>
 
-      {/* Sixth Section: Preview/Carousel */}
-      <section className="relative z-10 py-24 overflow-hidden bg-white">
-        <div className="max-w-6xl mx-auto px-6 mb-16 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-block bg-brand-teal/10 text-brand-teal px-6 py-2 rounded-full font-black text-sm mb-6 uppercase tracking-widest"
-          >
-            Amostras Reais
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl md:text-5xl font-black text-text-dark tracking-tight"
-          >
-            Dá uma espiadinha no material 👀
-          </motion.h2>
-        </div>
-
-        {/* Carousel Container */}
-        <div className="relative w-full max-w-7xl mx-auto px-4 md:px-12 py-16 bg-soft-sage rounded-[3rem] md:rounded-[5rem] shadow-inner mb-12">
-          {/* Decorative Elements */}
-          <div className="absolute -top-10 -right-4 bg-brand-pink p-5 rounded-full shadow-lg rotate-12 z-20 border-4 border-white lg:block hidden">
-             <Star className="text-white fill-white" size={32} />
-          </div>
-          <div className="absolute -bottom-10 -left-4 bg-brand-amber p-5 rounded-2xl shadow-xl -rotate-12 z-20 border-4 border-white lg:block hidden">
-             <Pencil size={32} className="text-white" />
-          </div>
-
-          <div className="relative overflow-hidden">
-            <motion.div 
-              className="flex gap-4 md:gap-10"
-              animate={{ x: [0, "-50%"] }}
-              transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-              style={{ width: "fit-content" }}
-            >
-              {[
-                "https://i.ibb.co/v4MpVCyN/amostra-1-Bb7-Emq4-H.png",
-                "https://i.ibb.co/Z6cpC5wC/amostra-2-DCxhnge-K.png",
-                "https://i.ibb.co/60VCxxZq/amostra-3-9l1116-Mc.png",
-                "https://i.ibb.co/dJm2H94V/amostra-4-Dy-R6x8un.png",
-                "https://i.ibb.co/BktMGVb/amostra-5-Bk62-Jw-BK.png",
-                "https://i.ibb.co/GfYNwBXB/amostra-6-C9-SVogpo.png",
-                "https://i.ibb.co/tPkW3NZP/amostra-7-B3-Pm-XLAg.png",
-                "https://i.ibb.co/v4MpVCyN/amostra-1-Bb7-Emq4-H.png",
-                "https://i.ibb.co/Z6cpC5wC/amostra-2-DCxhnge-K.png",
-                "https://i.ibb.co/60VCxxZq/amostra-3-9l1116-Mc.png",
-                "https://i.ibb.co/dJm2H94V/amostra-4-Dy-R6x8un.png",
-                "https://i.ibb.co/BktMGVb/amostra-5-Bk62-Jw-BK.png"
-              ].map((url, i) => (
-                <div key={i} className="flex-shrink-0 w-[260px] md:w-[480px] bg-white p-2 md:p-4 rounded-[2rem] md:rounded-[3rem] shadow-2xl border-4 border-white relative group transition-transform hover:-translate-y-4">
-                  <div className="bg-soft-rose rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden aspect-[3/4.2] flex items-center justify-center">
-                    <img
-                      src={url}
-                      alt={`Amostra ${i + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-
-        <div className="text-center mt-12 px-6">
-          <p className="text-text-muted font-bold text-xl md:text-3xl flex items-center justify-center gap-4">
-            Essas são só algumas páginas do kit! 📖
+      {/* --- 7. FOOTER --- */}
+      <footer className="py-20 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-xs font-black uppercase tracking-[0.4em] text-slate-300">
+             © 2024 Combo Mestre do Texto · Feito para quem ama ensinar
           </p>
         </div>
-      </section>
-
-      {/* Seventh Section: 3 Steps */}
-      <section className="relative z-10 py-24 bg-soft-rose/30">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl md:text-5xl font-black text-text-dark text-center mb-16 tracking-tight"
-          >
-            Sua aula pronta em 3 passos 🚀
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {[
-              { num: "1", title: "Comprou", text: "Acesso imediato ao arquivo digital após a confirmação.", icon: Download, color: "bg-brand-pink" },
-              { num: "2", title: "Imprimiu", text: "Funciona em qualquer impressora. Colorido ou P&B.", icon: Printer, color: "bg-brand-teal" },
-              { num: "3", title: "Aplicou", text: "Material pronto para brilhar na sala de aula agora mesmo.", icon: Smile, color: "bg-brand-indigo" }
-            ].map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm p-10 rounded-[3rem] flex flex-col items-center text-center shadow-lg border border-white group hover:shadow-xl transition-all"
-              >
-                <span className="text-6xl md:text-8xl font-black text-brand-pink/10 absolute -top-4 left-6 select-none leading-none">
-                  {step.num}
-                </span>
-                <div className={`${step.color} p-5 rounded-2xl mb-8 shadow-xl group-hover:scale-110 transition-transform`}>
-                  <step.icon className="text-white" size={32} />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-black text-text-dark mb-4">{step.title}</h3>
-                <p className="text-text-muted font-semibold leading-relaxed font-inter">
-                  {step.text}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Eighth Section: Bonuses */}
-      <section className="relative z-10 py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-4xl md:text-6xl font-black text-text-dark mb-4 tracking-tight">
-              Presentes Exclusivos 🎁
-            </h2>
-            <p className="text-xl text-text-muted font-medium font-inter">Quem compra hoje leva o dobro de valor</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {[
-              { title: "Gabarito Completo", desc: "Todas as respostas organizadas para sua correção rápida.", price: "R$9,90", icon: ClipboardCheck, color: "bg-soft-rose", accent: "text-brand-pink" },
-              { title: "Ficha de Progresso", desc: "Acompanhe a evolução de cada aluno individualmente.", price: "R$7,90", icon: BarChart3, color: "bg-soft-lavender", accent: "text-brand-indigo" },
-              { title: "Sequência Didática", desc: "Como usar o material passo a passo no seu ano letivo.", price: "R$12,90", icon: CalendarDays, color: "bg-soft-peach", accent: "text-brand-amber" }
-            ].map((bonus, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`${bonus.color} p-8 rounded-[3rem] flex flex-col items-center text-center shadow-lg border border-white relative group`}
-              >
-                <div className="absolute -top-3 right-8 bg-brand-pink text-white text-[10px] font-black px-4 py-1 rounded-full shadow-lg z-10 uppercase tracking-widest">
-                  Grátis hoje
-                </div>
-                <div className="bg-white/80 p-5 rounded-2xl mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                  <bonus.icon className={bonus.accent} size={36} />
-                </div>
-                <h3 className="text-2xl font-black text-text-dark mb-2">{bonus.title}</h3>
-                <p className="text-text-muted font-semibold mb-6 flex-grow font-inter">{bonus.desc}</p>
-                <div className="text-xs font-bold text-brand-pink line-through opacity-60">Valor regular: {bonus.price}</div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[
-              { title: "Fluência Leitora", desc: "Sequências de leitura progressiva para entonação e compreensão oral.", price: "R$14,90", icon: BookOpenCheck, bg: "bg-soft-sage", accent: "text-brand-teal" },
-              { title: "Gêneros Textuais", desc: "Atividades por gênero: fábula, notícia, carta, tirinha e mais.", price: "R$19,90", icon: FileEdit, bg: "bg-soft-rose", accent: "text-brand-pink" }
-            ].map((excl, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 + i * 0.1 }}
-                className={`${excl.bg} p-8 rounded-[3rem] flex flex-col items-center text-center shadow-lg border border-white relative group h-full`}
-              >
-                <div className="absolute -top-3 right-8 bg-brand-indigo text-white text-[10px] font-black px-4 py-1 rounded-full shadow-lg z-10 uppercase tracking-widest">
-                  Exclusivo Premium
-                </div>
-                <div className="bg-white/80 p-5 rounded-2xl mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                  <excl.icon className={excl.accent} size={36} />
-                </div>
-                <h3 className="text-2xl font-black text-text-dark mb-2">{excl.title}</h3>
-                <p className="text-text-muted font-semibold mb-6 leading-relaxed font-inter">{excl.desc}</p>
-                <div className="text-xs font-bold text-brand-pink line-through opacity-60 italic">Incluso no Kit Premium</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Ninth Section: High-Impact Quote */}
-      <section className="relative z-10 py-32 bg-brand-pink overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-stars opacity-10" />
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <Sparkles className="text-white w-12 h-12 mx-auto opacity-50" />
-          </motion.div>
-
-          <motion.blockquote
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-black text-white leading-tight mb-12 tracking-tight"
-          >
-            "Minha turma evoluiu muito em leitura. As atividades são bem elaboradas e os alunos realmente interpretam."
-          </motion.blockquote>
-
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-white text-xl md:text-2xl font-black">
-              — Professora Ana, 2º ano 👩‍🏫
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Tenth Section: Testimonials Grid */}
-      <section id="depoimentos" className="relative z-10 py-24 bg-soft-rose/20">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-black text-text-dark text-center mb-16 tracking-tight"
-          >
-            Professoras que transformaram suas salas 🗨️
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-            {[
-              {
-                text: "Minhas alunas amaram as atividades! O material é lindo e economizei muito tempo no meu planejamento.",
-                name: "Ana Paula",
-                city: "São Paulo, SP",
-                color: "bg-white"
-              },
-              {
-                text: "Melhor investimento que fiz! Os textos são perfeitos para a faixa etária e muito envolventes.",
-                name: "Carla Souza",
-                city: "Belo Horizonte, MG",
-                color: "bg-white"
-              },
-              {
-                text: "Recomendo demais! Material completo e prático. Meus alunos pedem para fazer as atividades.",
-                name: "Juliana Mendes",
-                city: "Curitiba, PR",
-                color: "bg-white"
-              }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`${item.color} p-10 rounded-[3rem] shadow-xl border border-soft-rose flex flex-col h-full group hover:-translate-y-2 transition-all`}
-              >
-                <div className="flex gap-1 mb-8">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={18} className="fill-brand-amber text-brand-amber" />
-                  ))}
-                </div>
-                <p className="text-text-dark font-semibold italic text-lg leading-relaxed mb-10 flex-grow font-inter">
-                  "{item.text}"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-soft-rose rounded-full flex items-center justify-center text-2xl shadow-inner border-2 border-white">
-                    👩‍🏫
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-black text-text-dark text-lg">{item.name}</h4>
-                    <p className="text-text-muted text-xs font-bold uppercase tracking-widest">{item.city}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Eleventh Section: Pricing/Kits */}
-      <section id="planos" className="relative z-10 py-24 px-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-black text-slate-900 mb-4 tracking-tight"
-            >
-              Escolha o seu kit ✨
-            </motion.h2>
-            <p className="text-slate-600 text-xl font-bold">
-              Comece com o essencial ou leve tudo de uma vez
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Kit Essencial */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-[4rem] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-soft-rose flex flex-col h-full relative group hover:shadow-xl transition-all"
-            >
-              <div className="text-center mb-10">
-                <h3 className="text-3xl md:text-4xl font-black text-text-dark mb-4 group-hover:text-brand-pink transition-colors">Kit Essencial</h3>
-                <div className="flex flex-col items-center gap-1">
-                  <p className="text-text-muted line-through font-bold text-lg">De R$59,90</p>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-black text-text-dark">R$</span>
-                    <span className="text-6xl md:text-8xl font-black text-brand-pink tracking-tighter">17,90</span>
-                  </div>
-                </div>
-              </div>
-
-              <ul className="space-y-5 mb-12 flex-grow">
-                {[
-                  "267+ atividades de interpretação e produção",
-                  "Material do 1º ao 5º ano completo",
-                  "PDF pronto para imprimir e editável",
-                  "Bônus: Gabarito completo de todas as questões",
-                  "Bônus: Ficha de acompanhamento de leitura",
-                  "Acesso vitalício ao material"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-4 text-text-dark font-bold text-base md:text-lg">
-                    <div className="bg-brand-teal rounded-full p-1 mt-1 flex-shrink-0 shadow-sm">
-                      <CheckCircle2 className="text-white w-4 h-4" />
-                    </div>
-                    <span className="font-inter">{item}</span>
-                  </li>
-                ))}
-                {[
-                  "Atividades de Leitura Fluente (Exclusivo Premium)",
-                  "Pack Gêneros Textuais (Exclusivo Premium)"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-4 text-text-muted/40 font-bold select-none italic text-sm md:text-base">
-                    <Lock className="w-5 h-5 mt-1 flex-shrink-0" />
-                    <span className="line-through">{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="space-y-4">
-                <a 
-                  href={appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-brand-teal hover:bg-brand-teal/90 text-white py-6 md:py-8 rounded-[2.5rem] text-xl md:text-2xl font-black shadow-lg hover:shadow-xl transition-all active:scale-95 cursor-pointer flex items-center justify-center"
-                >
-                  Quero o Kit Essencial
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Kit Premium */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              {/* Highlight Badge */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-30 bg-brand-indigo text-white px-8 py-3 rounded-full font-black text-sm flex items-center gap-2 shadow-2xl animate-pulse whitespace-nowrap">
-                <Star className="w-4 h-4 fill-brand-amber text-brand-amber" />
-                OFERTA MAIS ESCOLHIDA
-              </div>
-
-              <div className="bg-white rounded-[4rem] p-8 md:p-14 shadow-[0_40px_100px_rgba(99,102,241,0.2)] border-4 border-brand-indigo flex flex-col h-full bg-[radial-gradient(circle_at_top_right,_#F5F3FF_0%,_transparent_50%)] from-indigo-50 overflow-hidden relative">
-                <div className="text-center mb-10">
-                   <div className="mb-12 flex justify-center">
-                      <div className="relative w-48 h-48 md:w-64 md:h-64 group">
-                         <div className="absolute inset-0 bg-brand-indigo/10 rounded-full blur-3xl group-hover:bg-brand-indigo/20 transition-colors"></div>
-                         <img 
-                            src="https://i.ibb.co/v4MpVCyN/amostra-1-Bb7-Emq4-H.png" 
-                            alt="Premium" 
-                            className="relative z-10 w-full h-full object-contain rotate-2 drop-shadow-2xl transition-transform group-hover:rotate-0 duration-500"
-                         />
-                         <div className="absolute -top-4 -right-4 bg-brand-amber text-white p-4 rounded-2xl shadow-xl rotate-12 font-black text-lg border-2 border-white">
-                            +2 BÔNUS
-                         </div>
-                      </div>
-                   </div>
-                   <h3 className="text-4xl md:text-5xl font-black text-text-dark mb-4">Mestre do Texto</h3>
-                   <p className="text-brand-indigo font-black text-sm tracking-[0.2em] uppercase mb-8">O Combo Definitivo</p>
-                   
-                   <div className="flex flex-col items-center gap-2 mb-10">
-                      <p className="text-text-muted line-through font-bold text-xl opacity-60">De R$97,00</p>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-3xl font-black text-text-dark">R$</span>
-                        <span className="text-7xl md:text-9xl font-black text-brand-indigo tracking-tighter">26,90</span>
-                      </div>
-                      <div className="bg-brand-amber/20 text-brand-amber px-6 py-2 rounded-full text-sm font-black shadow-sm border border-brand-amber/10 mt-4">
-                        Economia real de R$70,10
-                      </div>
-                   </div>
-                </div>
-
-                <ul className="space-y-5 mb-14 flex-grow">
-                  <li className="flex items-start gap-4 text-text-dark font-black text-lg md:text-xl">
-                    <div className="bg-brand-indigo rounded-full p-1 mt-1 flex-shrink-0 shadow-sm">
-                      <CheckCircle2 className="text-white w-4 h-4" />
-                    </div>
-                    <span className="font-inter">Tudo do Kit Essencial</span>
-                  </li>
-                  {[
-                    "✨ Pack Exclusivo: Fluência Leitora (1º ao 5º ano)",
-                    "✨ Pack Exclusivo: Gêneros Textuais BNCC (1º ao 5º ano)",
-                    "Material de Produção Argumentativa Avançada"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-4 text-brand-indigo font-black italic text-base md:text-lg">
-                      <div className="bg-brand-indigo rounded-full p-1 mt-1 flex-shrink-0 shadow-sm">
-                        <CheckCircle2 className="text-white w-4 h-4" />
-                      </div>
-                      <span className="font-inter">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="space-y-6">
-                  <a 
-                    href={appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white py-8 md:py-10 rounded-[3rem] text-xl md:text-3xl font-black shadow-[0_20px_50px_rgba(99,102,241,0.4)] hover:shadow-[0_25px_70px_rgba(99,102,241,0.5)] transition-all active:scale-95 flex items-center justify-center gap-4 cursor-pointer"
-                  >
-                    🎯 Quero o Combo Completo
-                  </a>
-                  <p className="flex items-center justify-center gap-3 text-text-muted text-sm font-black text-center uppercase tracking-widest opacity-60">
-                    <ShieldCheck className="w-5 h-5 text-brand-teal" />
-                    Compra 100% Segura · 7 Dias de Garantia
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Twelfth Section: Guarantee & FAQ */}
-      <section className="relative z-10 py-32 px-6 bg-soft-rose/20">
-        <div className="max-w-4xl mx-auto">
-          {/* Guarantee */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-32 bg-white p-12 md:p-20 rounded-[4rem] shadow-2xl border border-white"
-          >
-            <div className="inline-flex items-center justify-center bg-brand-teal p-6 rounded-[2rem] mb-10 shadow-[0_20px_40px_rgba(54,186,152,0.3)] text-white">
-              <ShieldCheck size={64} />
-            </div>
-            <h2 className="text-4xl md:text-6xl font-black text-text-dark mb-8 tracking-tight">
-              Satisfação Garantida 🛡️
-            </h2>
-            <p className="text-text-muted text-xl md:text-2xl font-semibold leading-relaxed font-inter max-w-2xl mx-auto">
-              Teste por 7 dias. Se você não sentir que o material transformou suas aulas, devolvemos cada centavo. Sem perguntas.
-            </p>
-          </motion.div>
-
-          {/* FAQ */}
-          <div id="faq" className="space-y-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-black text-text-dark text-center mb-20 tracking-tight"
-            >
-              Perguntas Frequentes 😉
-            </motion.h2>
-
-            <div className="space-y-6">
-              {faqs.map((faq, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-[2.5rem] border border-soft-rose shadow-sm overflow-hidden"
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                    className="w-full px-8 md:px-12 py-8 flex items-center justify-between text-left hover:bg-soft-rose/10 transition-colors"
-                  >
-                    <span className="text-xl md:text-2xl font-black text-text-dark tracking-tight">{faq.question}</span>
-                    <motion.div
-                      animate={{ rotate: openFaq === index ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-brand-pink"
-                    >
-                      <ChevronDown size={32} strokeWidth={3} />
-                    </motion.div>
-                  </button>
-                  
-                  <AnimatePresence>
-                    {openFaq === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: "circOut" }}
-                      >
-                        <div className="px-8 md:px-12 pb-10 text-text-muted font-semibold leading-relaxed text-lg md:text-xl font-inter">
-                          {faq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Decorative Confetti */}
-      <div className="fixed inset-0 pointer-events-none opacity-20 z-0">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 10 + 4}px`,
-              height: `${Math.random() * 10 + 4}px`,
-              backgroundColor: ['#FF6B8B', '#36BA98', '#6366F1', '#F59E0B'][Math.floor(Math.random() * 4)],
-              opacity: Math.random() * 0.3 + 0.1,
-            }}
-          />
-        ))}
-      </div>
-      
-      {/* Footer Branding */}
-      <footer className="relative z-10 py-12 text-center text-text-muted/60 font-black text-xs uppercase tracking-[0.3em]">
-        © 2024 Combo Mestre do Texto · Feito com ❤️ para professoras
       </footer>
     </div>
   );
