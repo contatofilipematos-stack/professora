@@ -190,7 +190,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#fafafa] font-sans text-text-dark selection:bg-brand-indigo/10">
       {/* --- 1. HERO SECTION --- */}
-      <header className="relative pt-16 pb-24 md:pt-28 md:pb-36 overflow-hidden">
+      <header className="relative pt-16 pb-24 md:pt-28 md:pb-36 overflow-hidden bg-grid">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f0f9ff_0%,_transparent_50%)] -z-10" />
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -270,7 +270,7 @@ export default function App() {
       </header>
 
       {/* --- 2. BENEFITS SECTION --- */}
-      <section className="py-24 bg-white border-y border-slate-100">
+      <section className="py-24 bg-white border-y border-slate-100 bg-dots">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">O que você ganha ao garantir seu acesso hoje</h2>
@@ -331,7 +331,7 @@ export default function App() {
       </section>
 
       {/* --- 4. WHAT'S INSIDE --- */}
-      <section className="py-24 bg-slate-900 text-white rounded-[4rem] mx-4 md:mx-10 my-10 overflow-hidden relative">
+      <section className="py-24 bg-slate-900 text-white rounded-[4rem] mx-4 md:mx-10 my-10 overflow-hidden relative bg-grid-white">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-indigo opacity-10 blur-3xl rounded-full translate-x-1/2" />
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
             <h2 className="text-3xl md:text-6xl font-black mb-16 tracking-tight">O que você estará baixando agora?</h2>
@@ -351,7 +351,7 @@ export default function App() {
       </section>
 
       {/* --- BONUS SECTION --- */}
-      <section className="py-24 bg-brand-indigo/5 relative overflow-hidden">
+      <section className="py-24 bg-brand-indigo/5 relative overflow-hidden bg-dots">
         <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -430,7 +430,7 @@ export default function App() {
       </section>
 
       {/* --- 5. OFFER SECTION (RE-DESIGNED CARDS) --- */}
-      <section id="planos" className="py-32 bg-[#fafafa]">
+      <section id="planos" className="py-32 bg-[#fafafa] bg-grid">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">Comece agora mesmo</h2>
