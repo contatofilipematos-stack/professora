@@ -3,12 +3,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Star, Pencil, BookOpen, Download, ArrowRight, Sparkles, Search, Frown, Clock, BookX, CheckCircle2, GraduationCap, CalendarCheck, Layers, TrendingUp, Palette, FileText, Book, Printer, Smile, ClipboardCheck, BarChart3, CalendarDays, BookOpenCheck, FileEdit, Gift, Lock, ShieldCheck, ChevronDown, Shield } from "lucide-react";
+import { saveUTMs, appendUTMs } from "./lib/utm";
 
 export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useEffect(() => {
+    saveUTMs();
+  }, []);
 
   const faqs = [
     {
@@ -139,7 +144,7 @@ export default function App() {
           className="flex flex-col items-center gap-8 w-full max-w-2xl px-4"
         >
           <a 
-            href="https://pay.lowify.com.br/checkout.php?product_id=ImZoQR"
+            href={appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR")}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full md:w-auto bg-brand-pink hover:bg-brand-pink/90 active:scale-95 text-white px-8 md:px-14 py-5 md:py-7 rounded-[2rem] font-black text-xl md:text-3xl shadow-[0_20px_60px_rgba(255,107,139,0.3)] hover:shadow-[0_25px_80px_rgba(255,107,139,0.4)] transition-all flex items-center justify-center gap-4 cursor-pointer group tracking-tight"
@@ -724,7 +729,7 @@ export default function App() {
 
               <div className="space-y-4">
                 <a 
-                  href="https://pay.lowify.com.br/checkout.php?product_id=ImZoQR"
+                  href={appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-brand-teal hover:bg-brand-teal/90 text-white py-6 md:py-8 rounded-[2.5rem] text-xl md:text-2xl font-black shadow-lg hover:shadow-xl transition-all active:scale-95 cursor-pointer flex items-center justify-center"
@@ -800,7 +805,7 @@ export default function App() {
 
                 <div className="space-y-6">
                   <a 
-                    href="https://pay.lowify.com.br/checkout.php?product_id=ImZoQR"
+                    href={appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white py-8 md:py-10 rounded-[3rem] text-xl md:text-3xl font-black shadow-[0_20px_50px_rgba(99,102,241,0.4)] hover:shadow-[0_25px_70px_rgba(99,102,241,0.5)] transition-all active:scale-95 flex items-center justify-center gap-4 cursor-pointer"
