@@ -220,7 +220,7 @@ export default function App() {
                 whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-12 py-6 rounded-full font-black text-xl shadow-premium transition-all flex items-center justify-center text-center"
               >
-                QUERO ACESSAR AGORA
+                QUERO ENSINAR MELHOR
               </motion.a>
               <div className="flex flex-col">
                 <div className="flex -space-x-2">
@@ -475,7 +475,7 @@ export default function App() {
                 whileTap={{ scale: 0.98 }}
                 className="w-full bg-slate-900 border-2 border-slate-900 hover:bg-slate-800 text-white py-6 rounded-full font-black text-xl transition-all flex items-center justify-center"
               >
-                RECEBER MATERIAL COMPLETO
+                RECEBER MATERIAL BÁSICO
               </motion.a>
               <p className="mt-6 text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
                  <Shield size={14} /> Pagamento 100% Seguro
@@ -532,7 +532,7 @@ export default function App() {
                 whileTap={{ scale: 0.98 }}
                 className="w-full bg-brand-indigo hover:bg-brand-indigo/95 text-white py-6 rounded-full font-black text-xl transition-all flex items-center justify-center shadow-lg shadow-indigo-200"
               >
-                GARANTIR ACESSO PREMIUM
+                RECEBER MATERIAL COMPLETO
               </motion.a>
               <div className="mt-6 flex flex-col items-center gap-3">
                  <p className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
