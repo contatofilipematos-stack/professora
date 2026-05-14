@@ -1,0 +1,6 @@
+{
+  "name": "Kit de Interpretação de Texto",
+  "description": "Material pronto para imprimir com atividades de interpretação e produção de texto do 1º ao 5º ano.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

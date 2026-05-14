@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  --color-soft-rose: #FFF5F5;
+  --color-soft-sage: #F0FDF4;
+  --color-soft-lavender: #F5F3FF;
+  --color-soft-peach: #FFF7ED;
+  
+  --color-brand-pink: #FF6B8B;
+  --color-brand-teal: #36BA98;
+  --color-brand-indigo: #6366F1;
+  --color-brand-amber: #F59E0B;
+
+  --color-text-dark: #334155;
+  --color-text-muted: #64748B;
+
+  --background-image-dots: radial-gradient(#F8BA9A 1px, transparent 1px);
+  --background-image-stars: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10l2.35 7.24h7.61l-6.16 4.47 2.35 7.24L30 24.48l-6.16 4.47 2.35-7.24-6.16-4.47h7.61L30 10z' fill='%23F8BA9A' fill-opacity='0.1'/%3E%3C/svg%3E");
+}
+
+@utility bg-dots {
+  background-image: var(--background-image-dots);
+  background-size: 24px 24px;
+}
+
+@utility bg-stars {
+  background-image: var(--background-image-stars);
+  background-size: 60px 60px;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
