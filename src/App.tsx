@@ -587,18 +587,7 @@ export default function App() {
             ))}
           </div>
 
-          <div className="mt-32 p-12 rounded-[3.5rem] bg-indigo-50 border-2 border-indigo-100 text-center relative overflow-hidden group">
-             <div className="absolute top-0 left-0 w-2 h-full bg-brand-indigo" />
-             <div className="relative z-10">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 mx-auto shadow-sm">
-                   <Smile size={32} className="text-brand-indigo" />
-                </div>
-                <h3 className="text-2xl font-black mb-4">Seu risco é zero!</h3>
-                <p className="text-text-muted font-medium leading-relaxed max-w-xl mx-auto">
-                   Se por qualquer motivo você não gostar do material em até 7 dias, nós devolvemos 100% do seu dinheiro. Transparência total.
-                </p>
-             </div>
-          </div>
+
         </div>
       </section>
 
