@@ -257,7 +257,7 @@ export default function App() {
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-12 py-4 rounded-full font-black text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center"
+                className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-4 sm:px-14 py-3 rounded-full font-bold text-xs sm:text-lg md:text-xl shadow-lg transition-all flex items-center justify-center text-center whitespace-nowrap tracking-wide"
               >
                 QUERO MEU KIT
               </motion.a>
@@ -440,7 +440,7 @@ export default function App() {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex bg-brand-pink hover:bg-brand-pink/90 text-white px-12 py-6 rounded-full font-black text-xl shadow-premium transition-all"
+              className="inline-flex bg-brand-pink hover:bg-brand-pink/90 text-white px-4 sm:px-14 py-3 rounded-full font-bold text-xs sm:text-lg shadow-lg transition-all whitespace-nowrap tracking-wide"
             >
               QUERO TODOS OS BÔNUS AGORA
             </motion.a>
@@ -523,7 +523,7 @@ export default function App() {
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-full font-black text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center"
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white px-2 sm:px-6 py-3 rounded-full font-bold text-[10px] sm:text-lg md:text-xl shadow-lg transition-all flex items-center justify-center text-center whitespace-nowrap tracking-wide"
               >
                 RECEBER MATERIAL BÁSICO
               </motion.a>
@@ -580,7 +580,7 @@ export default function App() {
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white py-4 rounded-full font-black text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center"
+                className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white px-2 sm:px-6 py-3 rounded-full font-bold text-[10px] sm:text-lg md:text-xl shadow-lg transition-all flex items-center justify-center text-center whitespace-nowrap tracking-wide"
               >
                 RECEBER MATERIAL COMPLETO
               </motion.a>
