@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Star, 
   ArrowRight, 
+  ArrowDown,
   Sparkles, 
   CheckCircle2, 
   Download, 
@@ -30,6 +31,42 @@ import {
   BookCheck
 } from "lucide-react";
 import { saveUTMs, appendUTMs } from "./lib/utm";
+
+// Safe JSON.stringify for external scripts (like utmify) that might hit circular structures or cross-origin issues
+if (typeof window !== 'undefined') {
+  const originalStringify = JSON.stringify;
+  JSON.stringify = function (value, replacer, space) {
+    try {
+      return originalStringify(value, replacer, space);
+    } catch (err: any) {
+      // Catch circular structures or security errors (from cross-origin access)
+      const isCircular = err instanceof TypeError && 
+        (err.message.includes('circular structure') || err.message.includes('Converting circular structure'));
+      const isSecurity = (err.name === 'SecurityError') || 
+        (err.message && (err.message.includes('cross-origin') || err.message.includes('Blocked a frame')));
+
+      if (isCircular || isSecurity) {
+        const cache = new Set();
+        return originalStringify(value, (key, val) => {
+          try {
+            if (typeof val === 'object' && val !== null) {
+              // Specifically ignore Window and other objects that cause trouble
+              if (val === window) return undefined;
+              
+              if (cache.has(val)) return undefined;
+              cache.add(val);
+            }
+            return typeof replacer === 'function' ? replacer(key, val) : val;
+          } catch (e) {
+            // If we can't even check the object, it's likely a cross-origin window/object
+            return undefined;
+          }
+        }, space);
+      }
+      throw err;
+    }
+  } as any;
+}
 
 const testimonials = [
   {
@@ -213,18 +250,27 @@ export default function App() {
               Dê adeus às horas de planejamento. Tenha em mãos <span className="text-text-dark font-bold">267+ atividades</span> de interpretação prontas para imprimir, alinhadas à BNCC.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-8 items-center mb-16">
+            <div className="flex flex-col items-center mb-16">
               <motion.a 
                 href="#planos"
-                variants={pulseVariants}
-                animate="animate"
+                animate={{ scale: [1, 1.02, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-12 py-6 rounded-full font-black text-xl shadow-premium transition-all flex items-center justify-center text-center"
+                className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-12 py-4 rounded-full font-black text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center"
               >
-                QUERO ENSINAR MELHOR
+                QUERO MEU KIT
               </motion.a>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+              
+              <div className="mt-4 flex items-center gap-2 text-text-muted font-bold text-sm">
+                <div className="flex gap-0.5">
+                   <ArrowDown size={14} className="text-brand-pink" />
+                   <ArrowDown size={14} className="text-brand-pink" />
+                </div>
+                Download imediato após a compra
+              </div>
+
+              <div className="flex flex-col items-center mt-12">
                 <div className="flex -space-x-2">
                   {profileAvatars.map((url, i) => (
                     <img 
@@ -390,9 +436,9 @@ export default function App() {
           <div className="mt-20 text-center">
             <motion.a 
               href="#planos"
-              variants={pulseVariants}
-              animate="animate"
-              whileHover={{ scale: 1.05 }}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="inline-flex bg-brand-pink hover:bg-brand-pink/90 text-white px-12 py-6 rounded-full font-black text-xl shadow-premium transition-all"
             >
@@ -473,11 +519,11 @@ export default function App() {
 
               <motion.a 
                 href={checkoutUrl}
-                variants={pulseVariants}
-                animate="animate"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-slate-900 border-2 border-slate-900 hover:bg-slate-800 text-white py-6 rounded-full font-black text-xl transition-all flex items-center justify-center"
+                animate={{ scale: [1, 1.02, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-full font-black text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center"
               >
                 RECEBER MATERIAL BÁSICO
               </motion.a>
@@ -500,10 +546,10 @@ export default function App() {
                 <p className="text-text-muted line-through font-bold text-lg mb-2">De R$29,90</p>
                 <div className="flex items-center justify-center gap-1">
                   <span className="text-4xl font-black text-brand-indigo">R$</span>
-                  <span className="text-8xl font-black tracking-tighter text-brand-indigo">19,90</span>
+                  <span className="text-8xl font-black tracking-tighter text-brand-indigo">17,90</span>
                 </div>
                 <div className="mt-4 inline-block bg-brand-amber/10 text-brand-amber px-4 py-1 rounded-full text-xs font-black">
-                   ECONOMIZE R$10,00 HOJE
+                   ECONOMIZE R$12,00 HOJE
                 </div>
               </div>
 
@@ -530,11 +576,11 @@ export default function App() {
 
               <motion.a 
                 href={checkoutUrl}
-                variants={pulseVariants}
-                animate="animate"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-brand-indigo hover:bg-brand-indigo/95 text-white py-6 rounded-full font-black text-xl transition-all flex items-center justify-center shadow-lg shadow-indigo-200"
+                animate={{ scale: [1, 1.02, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white py-4 rounded-full font-black text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center"
               >
                 RECEBER MATERIAL COMPLETO
               </motion.a>
