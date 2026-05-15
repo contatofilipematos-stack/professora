@@ -518,7 +518,7 @@ export default function App() {
               </div>
 
               <motion.a 
-                href={checkoutUrl}
+                href={appendUTMs("https://pay.lowify.com.br/checkout?product_id=tH3CLD")}
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.08 }}
