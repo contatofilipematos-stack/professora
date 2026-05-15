@@ -595,24 +595,25 @@ export default function App() {
       </section>
 
       {/* --- 90-DAY GUARANTEE --- */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-            <div className="p-8 md:p-12 bg-white rounded-3xl border border-slate-100 shadow-xl flex flex-col items-center">
-               <div className="w-20 h-20 flex items-center justify-center mb-6">
-                  <img src="https://i.ibb.co/Y4BKz5LY/1000239986-1.png" alt="Garantia" className="w-full h-full object-contain" />
-               </div>
-               <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6">
-                 Sua Garantia de 90 Dias
-               </h2>
-               <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl">
-                 Adquira seu material hoje. Se dentro de 90 dias você avaliar que o conteúdo não superou suas expectativas ou não trouxe os resultados esperados, devolvemos 100% do seu investimento. De forma simples, sem perguntas e sem burocracia.
-               </p>
-               <div className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-bold">
-                 <span>Risco Zero</span>
-                 <span>•</span>
-                 <span>Satisfação Garantida</span>
-               </div>
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="relative p-8 md:p-16 bg-white rounded-3xl border-2 border-brand-teal/20 shadow-2xl flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40">
+              <img src="https://i.ibb.co/Y4BKz5LY/1000239986-1.png" alt="Garantia 90 Dias" className="w-full h-full object-contain" />
             </div>
+            <div className="flex-1 text-center md:text-left">
+              <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
+                Garantia Incondicional de <span className="text-brand-teal">90 Dias</span>
+              </h2>
+              <p className="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed">
+                Adquira seu material hoje com total segurança. Se em até 90 dias você sentir que o conteúdo não é para você, devolvemos <strong>100% do seu investimento</strong>. Sem perguntas, sem burocracia, risco totalmente nosso.
+              </p>
+              <div className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-black text-lg shadow-lg">
+                <ShieldCheck size={24} />
+                <span>Risco Zero | Satisfação Garantida</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
