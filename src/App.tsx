@@ -192,11 +192,12 @@ export default function App() {
       {/* --- 1. HERO SECTION --- */}
       <header className="relative pt-16 pb-24 md:pt-28 md:pb-36 overflow-hidden bg-grid">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f0f9ff_0%,_transparent_50%)] -z-10" />
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="flex flex-col items-center"
           >
             <div className="inline-flex items-center gap-2 bg-brand-pink/10 text-brand-pink px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-8">
               <Sparkles size={14} />
@@ -204,14 +205,14 @@ export default function App() {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black leading-[1.1] tracking-tight mb-8">
-              267+ atividades de interpretação e produção de texto — <span className="text-brand-pink relative inline-block">do 1º ao 5º ano <span className="absolute bottom-1 left-0 w-full h-[6px] bg-brand-amber rounded-full -z-10 opacity-50"></span></span> 📚
+              267+ atividades de interpretação e produção de texto — <span className="text-brand-pink relative inline-block text-balance">do 1º ao 5º ano <span className="absolute bottom-1 left-0 w-full h-[6px] bg-brand-amber rounded-full -z-10 opacity-50"></span></span> 📚
             </h1>
             
-            <p className="text-xl md:text-2xl text-text-muted mb-12 leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl text-text-muted mb-12 leading-relaxed font-medium max-w-2xl">
               Dê adeus às horas de planejamento. Tenha em mãos <span className="text-text-dark font-bold">267+ atividades</span> de interpretação prontas para imprimir, alinhadas à BNCC.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-5 items-center">
+            <div className="flex flex-col sm:flex-row gap-8 items-center mb-16">
               <motion.a 
                 href="#planos"
                 variants={pulseVariants}
@@ -222,7 +223,7 @@ export default function App() {
               >
                 QUERO ENSINAR MELHOR
               </motion.a>
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                 <div className="flex -space-x-2">
                   {profileAvatars.map((url, i) => (
                     <img 
@@ -240,10 +241,10 @@ export default function App() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative lg:block"
+            className="relative w-full max-w-4xl"
           >
             <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white bg-white">
               <img 
@@ -255,7 +256,7 @@ export default function App() {
             </div>
             {/* Experience badge */}
             <div className="absolute -bottom-8 -left-8 glass p-6 rounded-3xl shadow-premium z-20 hidden md:block">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 text-left">
                 <div className="bg-brand-teal text-white p-3 rounded-2xl">
                   <Award size={32} />
                 </div>
@@ -265,6 +266,8 @@ export default function App() {
                 </div>
               </div>
             </div>
+            
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-amber/20 rounded-full blur-3xl" />
           </motion.div>
         </div>
       </header>
