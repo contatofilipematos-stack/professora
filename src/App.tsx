@@ -253,11 +253,11 @@ export default function App() {
             <div className="flex flex-col items-center mb-16">
               <motion.a 
                 href="#planos"
-                animate={{ scale: [1, 1.02, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                whileHover={{ scale: 1.05 }}
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-10 sm:px-16 py-5 rounded-full font-black text-base sm:text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center whitespace-nowrap tracking-wide"
+                className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-8 sm:px-16 py-5 rounded-full font-black text-xl sm:text-2xl shadow-premium transition-all flex items-center justify-center text-center tracking-wide"
               >
                 QUERO MEU KIT
               </motion.a>
@@ -436,11 +436,11 @@ export default function App() {
           <div className="mt-20 text-center">
             <motion.a 
               href="#planos"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              whileHover={{ scale: 1.1 }}
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              whileHover={{ scale: 1.15 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex bg-brand-pink hover:bg-brand-pink/90 text-white px-10 sm:px-16 py-5 rounded-full font-black text-base sm:text-xl shadow-premium transition-all whitespace-nowrap tracking-wide"
+              className="inline-flex bg-brand-pink hover:bg-brand-pink/90 text-white px-8 sm:px-16 py-5 rounded-full font-black text-xl sm:text-2xl shadow-premium transition-all tracking-wide"
             >
               QUERO TODOS OS BÔNUS AGORA
             </motion.a>
@@ -519,11 +519,11 @@ export default function App() {
 
               <motion.a 
                 href={checkoutUrl}
-                animate={{ scale: [1, 1.02, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                whileHover={{ scale: 1.05 }}
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white px-6 py-5 rounded-full font-black text-xs sm:text-lg md:text-xl shadow-premium transition-all flex items-center justify-center text-center whitespace-nowrap tracking-wide"
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white px-4 sm:px-8 py-5 rounded-full font-black text-lg sm:text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center tracking-wide"
               >
                 RECEBER MATERIAL BÁSICO
               </motion.a>
@@ -576,11 +576,11 @@ export default function App() {
 
               <motion.a 
                 href={checkoutUrl}
-                animate={{ scale: [1, 1.02, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                whileHover={{ scale: 1.05 }}
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white px-6 py-5 rounded-full font-black text-xs sm:text-lg md:text-xl shadow-premium transition-all flex items-center justify-center text-center whitespace-nowrap tracking-wide"
+                className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white px-4 sm:px-8 py-5 rounded-full font-black text-lg sm:text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center tracking-wide"
               >
                 RECEBER MATERIAL COMPLETO
               </motion.a>
