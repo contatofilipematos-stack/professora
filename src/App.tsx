@@ -586,11 +586,33 @@ export default function App() {
               </motion.a>
               <div className="mt-6 flex flex-col items-center gap-3">
                  <p className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <ShieldCheck size={14} className="text-brand-teal" /> Garantia de 7 Dias Incondicional
+                    <ShieldCheck size={14} className="text-brand-teal" /> Garantia de 90 Dias Incondicional
                  </p>
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* --- 90-DAY GUARANTEE --- */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+            <div className="p-8 md:p-12 bg-white rounded-3xl border border-slate-100 shadow-xl flex flex-col items-center">
+               <div className="w-20 h-20 flex items-center justify-center mb-6">
+                  <img src="https://i.ibb.co/Y4BKz5LY/1000239986-1.png" alt="Garantia" className="w-full h-full object-contain" />
+               </div>
+               <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6">
+                 Sua Garantia de 90 Dias
+               </h2>
+               <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl">
+                 Adquira seu material hoje. Se dentro de 90 dias você avaliar que o conteúdo não superou suas expectativas ou não trouxe os resultados esperados, devolvemos 100% do seu investimento. De forma simples, sem perguntas e sem burocracia.
+               </p>
+               <div className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-bold">
+                 <span>Risco Zero</span>
+                 <span>•</span>
+                 <span>Satisfação Garantida</span>
+               </div>
+            </div>
         </div>
       </section>
 
