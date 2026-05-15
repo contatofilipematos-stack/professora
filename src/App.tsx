@@ -204,8 +204,9 @@ export default function App() {
               <span>Material Premium para Professores</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-black leading-[1.1] tracking-tight mb-8">
-              267+ atividades de interpretação e produção de texto — <span className="text-brand-pink relative inline-block text-balance">do 1º ao 5º ano <span className="absolute bottom-1 left-0 w-full h-[6px] bg-brand-amber rounded-full -z-10 opacity-50"></span></span> 📚
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.2] tracking-tight mb-8 max-w-4xl">
+              <span className="block mb-4">267+ atividades de interpretação e produção de texto</span>
+              <span className="text-brand-pink block">Do 1º ao 5º ano 📚</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-text-muted mb-12 leading-relaxed font-medium max-w-2xl">
