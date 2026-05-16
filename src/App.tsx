@@ -1064,7 +1064,7 @@ export default function App() {
               <div className="mb-10 text-center relative z-10">
                 <div className="mb-6 w-full max-w-[280px] mx-auto">
                   <img 
-                    src="https://i.ibb.co/WvLP8Cb8/produto-mockup-ri7la-RSR.png" 
+                    src="https://i.ibb.co/GvmX8TyT/Whats-App-Image-2026-05-16-at-11-02-47.jpg" 
                     alt="Kit Premium Mockup" 
                     className="w-full h-auto object-contain mix-blend-multiply"
                     referrerPolicy="no-referrer"
