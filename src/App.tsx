@@ -1062,6 +1062,14 @@ export default function App() {
               <div className="absolute inset-0 bg-gradient-to-br from-edu-purple/5 to-transparent pointer-events-none" />
               
               <div className="mb-10 text-center relative z-10">
+                <div className="mb-6 w-full max-w-[280px] mx-auto">
+                  <img 
+                    src="https://i.ibb.co/WvLP8Cb8/produto-mockup-ri7la-RSR.png" 
+                    alt="Kit Premium Mockup" 
+                    className="w-full h-auto object-contain mix-blend-multiply"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
                 <h3 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-r from-edu-purple to-edu-rose bg-clip-text text-transparent tracking-tighter">
                   Kit Premium
                 </h3>
