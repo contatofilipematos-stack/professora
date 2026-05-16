@@ -156,37 +156,41 @@ const bonusCards = [
   {
     title: "Gabarito completo",
     desc: "Todas as respostas organizadas para corrigir rápido e com segurança.",
-    value: "Valor: R$9,90",
+    price: "GRÁTIS",
+    originalPrice: "R$ 9,90",
     color: "bg-[#cdf3ec]",
     badge: "BÔNUS",
-    badgeColor: "bg-brand-pink",
+    badgeColor: "bg-edu-rose",
     iconName: "ClipboardCheck",
     iconColor: "text-teal-600"
   },
   {
     title: "Ficha de acompanhamento de leitura",
     desc: "Registro simples do progresso de cada aluno em interpretação e escrita.",
-    value: "Valor: R$7,90",
+    price: "GRÁTIS",
+    originalPrice: "R$ 7,90",
     color: "bg-[#ede4f5]",
     badge: "BÔNUS",
-    badgeColor: "bg-brand-pink",
+    badgeColor: "bg-edu-rose",
     iconName: "TrendingUp",
     iconColor: "text-purple-600"
   },
   {
     title: "Sequência didática sugerida",
     desc: "Como usar as 267+ atividades ao longo do ano sem perder o fio pedagógico.",
-    value: "Valor: R$12,90",
+    price: "GRÁTIS",
+    originalPrice: "R$ 12,90",
     color: "bg-[#fef0c3]",
     badge: "BÔNUS",
-    badgeColor: "bg-brand-pink",
+    badgeColor: "bg-edu-rose",
     iconName: "Calendar",
     iconColor: "text-amber-600"
   },
   {
     title: "Atividades de Leitura Fluente",
     desc: "Sequências de leitura progressiva para desenvolver fluência, entonação e compreensão oral — do 1º ao 5º ano.",
-    value: "Valor: R$14,90",
+    price: "GRÁTIS",
+    originalPrice: "R$ 14,90",
     color: "bg-[#d9eff8]",
     badge: "Exclusivo Premium",
     badgeColor: "bg-[#7c3aed]",
@@ -196,13 +200,14 @@ const bonusCards = [
   {
     title: "Gêneros Textuais — 1º ao 5º ano",
     desc: "Atividades completas por gênero: fábula, poema, notícia, carta, conto, tirinha, receita e muito mais. Alinhado à BNCC.",
-    value: "Valor: R$19,90",
+    price: "GRÁTIS",
+    originalPrice: "R$ 19,90",
     color: "bg-[#fee2d5]",
     badge: "Exclusivo Premium",
     badgeColor: "bg-[#7c3aed]",
-    iconName: "Pencil",
-    iconColor: "text-rose-600"
-  },
+    iconName: "Book",
+    iconColor: "text-orange-600"
+  }
 ];
 
 const profileAvatars = [
@@ -888,9 +893,14 @@ export default function App() {
                 <p className="text-slate-600 font-medium text-[13px] md:text-sm leading-relaxed mb-6 max-w-2xl">
                   {card.desc}
                 </p>
-                <span className="text-edu-rose font-bold md:text-lg border-t border-edu-rose/10 pt-4 w-full max-w-[140px]">
-                  {card.value}
-                </span>
+                <div className="flex flex-col items-center border-t border-edu-rose/10 pt-4 w-full">
+                  <span className="text-slate-400 line-through text-xs font-bold mb-1">
+                    {card.originalPrice}
+                  </span>
+                  <span className="text-edu-rose font-black text-xl md:text-2xl">
+                    {card.price}
+                  </span>
+                </div>
               </motion.div>
             ))}
           </div>
