@@ -5,15 +5,22 @@
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-inter: "Inter", sans-serif;
 
-  --color-soft-rose: #FFF5F5;
-  --color-soft-sage: #F0FDF4;
-  --color-soft-lavender: #F5F3FF;
-  --color-soft-peach: #FFF7ED;
+  --color-soft-blue: #F0F9FF;
+  --color-soft-green: #F0FDF4;
+  --color-soft-purple: #F5F3FF;
+  --color-soft-cream: #FFFBF0;
+  --color-soft-pink: #FFF1F2;
   
-  --color-brand-pink: #E11D48; /* Deeper crimson/pink */
-  --color-brand-teal: #0D9488; /* Deeper teal */
-  --color-brand-indigo: #4F46E5; /* Deeper indigo */
-  --color-brand-amber: #D97706; /* Deeper amber */
+  --color-edu-blue: #0EA5E9;
+  --color-edu-green: #10B981;
+  --color-edu-purple: #8B5CF6;
+  --color-edu-amber: #F59E0B;
+  --color-edu-rose: #F43F5E;
+
+  --color-brand-pink: #F43F5E;
+  --color-brand-teal: #0EA5E9;
+  --color-brand-indigo: #8B5CF6;
+  --color-brand-amber: #F59E0B;
 
   --color-text-dark: #0F172A;
   --color-text-muted: #475569;

@@ -28,7 +28,19 @@ import {
   Palette,
   Pencil,
   FileText,
-  BookCheck
+  BookCheck,
+  Search,
+  Frown,
+  FileX,
+  Target,
+  TrendingUp,
+  Layers,
+  Printer,
+  ChevronRight,
+  GraduationCap,
+  Calendar,
+  Check,
+  Lock
 } from "lucide-react";
 import { saveUTMs, appendUTMs } from "./lib/utm";
 
@@ -108,65 +120,89 @@ const faqs = [
   }
 ];
 
-const bonusItems = [
-  {
-    title: "Fluência Leitora",
-    tag: "BÔNUS 1",
-    desc: "Um pack focado em acelerar a velocidade e compreensão de leitura dos seus alunos com exercícios dinâmicos.",
-    iconName: "BookOpen"
-  },
-  {
-    title: "Gêneros Textuais BNCC",
-    tag: "BÔNUS 2",
-    desc: "Atividades específicas para trabalhar todos os gêneros exigidos pela BNCC, do 1º ao 5º ano.",
-    iconName: "FileText"
-  },
-  {
-    title: "Escrita Criativa",
-    tag: "BÔNUS 3",
-    desc: "Estimule a imaginação com propostas de redação e produção textual que os alunos adoram fazer.",
-    iconName: "Pencil"
-  }
-];
 
-const insideItems = [
-  { title: "267+ Atividades", iconName: "Files", desc: "Interpretação e produção de texto." },
-  { title: "Gabarito Incluso", iconName: "CheckCircle2", desc: "Para correção rápida e sem erros." },
-  { title: "Download em PDF", iconName: "Download", desc: "Arquivo organizado e pronto para imprimir." },
-  { title: "Acesso Vitalício", iconName: "Award", desc: "O material é seu para sempre." },
-  { title: "Envio Imediato", iconName: "Zap", desc: "Receba tudo no seu e-mail agora." },
-];
+
+
+
 
 const pulseVariants = {
   animate: {
-    scale: [1, 1.02, 1],
+    scale: [1, 1.05, 1],
     transition: {
-      duration: 2,
+      duration: 1.5,
       repeat: Infinity,
       ease: "easeInOut"
     }
   }
 };
 
-const benefitItems = [
+const WaveDivider = ({ fillColor, className = "" }: { fillColor: string; className?: string }) => (
+  <div className={`absolute bottom-0 left-0 w-full overflow-hidden leading-[0] pointer-events-none ${className}`}>
+    <svg 
+      viewBox="0 0 1200 120" 
+      preserveAspectRatio="none" 
+      className="relative block w-full h-[40px] md:h-[70px]"
+    >
+      <path 
+        d="M0,0 C600,120 1200,0 1200,120 H0 Z" 
+        fill={fillColor}
+      ></path>
+    </svg>
+  </div>
+);
+
+
+const bonusCards = [
   {
-    iconName: "Clock",
-    title: "Economia de Tempo",
-    desc: "Planejamento que duraria horas agora é feito em segundos. É só escolher, imprimir e aplicar.",
-    color: "bg-blue-50 text-blue-600"
+    title: "Gabarito completo",
+    desc: "Todas as respostas organizadas para corrigir rápido e com segurança.",
+    value: "Valor: R$9,90",
+    color: "bg-[#cdf3ec]",
+    badge: "BÔNUS",
+    badgeColor: "bg-brand-pink",
+    iconName: "ClipboardCheck",
+    iconColor: "text-teal-600"
   },
   {
-    iconName: "Zap",
-    title: "Engajamento Real",
-    desc: "Textos selecionados que despertam a curiosidade e fazem os alunos quererem ler de verdade.",
-    color: "bg-rose-50 text-rose-600"
+    title: "Ficha de acompanhamento de leitura",
+    desc: "Registro simples do progresso de cada aluno em interpretação e escrita.",
+    value: "Valor: R$7,90",
+    color: "bg-[#ede4f5]",
+    badge: "BÔNUS",
+    badgeColor: "bg-brand-pink",
+    iconName: "TrendingUp",
+    iconColor: "text-purple-600"
   },
   {
-    iconName: "ShieldCheck",
-    title: "Segurança Pedagógica",
-    desc: "Material estruturado, com gabarito e totalmente alinhado às diretrizes da BNCC.",
-    color: "bg-emerald-50 text-emerald-600"
-  }
+    title: "Sequência didática sugerida",
+    desc: "Como usar as 267+ atividades ao longo do ano sem perder o fio pedagógico.",
+    value: "Valor: R$12,90",
+    color: "bg-[#fef0c3]",
+    badge: "BÔNUS",
+    badgeColor: "bg-brand-pink",
+    iconName: "Calendar",
+    iconColor: "text-amber-600"
+  },
+  {
+    title: "Atividades de Leitura Fluente",
+    desc: "Sequências de leitura progressiva para desenvolver fluência, entonação e compreensão oral — do 1º ao 5º ano.",
+    value: "Valor: R$14,90",
+    color: "bg-[#d9eff8]",
+    badge: "Exclusivo Premium",
+    badgeColor: "bg-[#7c3aed]",
+    iconName: "BookOpen",
+    iconColor: "text-sky-600"
+  },
+  {
+    title: "Gêneros Textuais — 1º ao 5º ano",
+    desc: "Atividades completas por gênero: fábula, poema, notícia, carta, conto, tirinha, receita e muito mais. Alinhado à BNCC.",
+    value: "Valor: R$19,90",
+    color: "bg-[#fee2d5]",
+    badge: "Exclusivo Premium",
+    badgeColor: "bg-[#7c3aed]",
+    iconName: "Pencil",
+    iconColor: "text-rose-600"
+  },
 ];
 
 const profileAvatars = [
@@ -225,10 +261,11 @@ export default function App() {
   const checkoutUrl = appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR");
 
   return (
-    <div className="min-h-screen bg-[#fafafa] font-sans text-text-dark selection:bg-brand-indigo/10">
+    <div className="min-h-screen bg-soft-blue/30 font-sans text-text-dark selection:bg-edu-blue/10">
       {/* --- 1. HERO SECTION --- */}
-      <header className="relative pt-16 pb-24 md:pt-28 md:pb-36 overflow-hidden bg-grid">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f0f9ff_0%,_transparent_50%)] -z-10" />
+      <header className="relative pt-16 pb-32 md:pt-28 md:pb-48 overflow-hidden bg-grid bg-soft-blue/20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#e0f2fe_0%,_transparent_50%)] -z-10" />
+        <WaveDivider fillColor="#ffffff" />
         <div className="max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -236,14 +273,14 @@ export default function App() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-2 bg-brand-pink/10 text-brand-pink px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-8">
+            <div className="inline-flex items-center gap-2 bg-edu-rose/10 text-edu-rose px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-8">
               <Sparkles size={14} />
               <span>Material Premium para Professores</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.2] tracking-tight mb-8 max-w-4xl">
               <span className="block mb-4">267+ atividades de interpretação e produção de texto</span>
-              <span className="text-brand-pink block">Do 1º ao 5º ano 📚</span>
+              <span className="text-edu-rose block">Do 1º ao 5º ano 📚</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-text-muted mb-12 leading-relaxed font-medium max-w-2xl">
@@ -253,19 +290,19 @@ export default function App() {
             <div className="flex flex-col items-center mb-16">
               <motion.a 
                 href="#planos"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                whileHover={{ scale: 1.08 }}
+                variants={pulseVariants}
+                animate="animate"
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto bg-brand-indigo hover:bg-brand-indigo/90 text-white px-8 sm:px-16 py-5 rounded-full font-black text-xl sm:text-2xl shadow-premium transition-all flex items-center justify-center text-center tracking-wide"
+                className="w-full sm:w-auto bg-edu-rose hover:bg-edu-rose/90 text-white px-8 py-4 rounded-full font-black text-base md:text-lg shadow-lg transition-all flex items-center justify-center text-center tracking-tight whitespace-nowrap"
               >
-                QUERO MEU KIT
+                QUERO MEU KIT →
               </motion.a>
               
               <div className="mt-4 flex items-center gap-2 text-text-muted font-bold text-sm">
                 <div className="flex gap-0.5">
-                   <ArrowDown size={14} className="text-brand-pink" />
-                   <ArrowDown size={14} className="text-brand-pink" />
+                   <ArrowDown size={14} className="text-edu-rose" />
+                   <ArrowDown size={14} className="text-edu-rose" />
                 </div>
                 Download imediato após a compra
               </div>
@@ -304,64 +341,400 @@ export default function App() {
             {/* Experience badge */}
             <div className="absolute -bottom-8 -left-8 glass p-6 rounded-3xl shadow-premium z-20 hidden md:block">
               <div className="flex items-center gap-4 text-left">
-                <div className="bg-brand-teal text-white p-3 rounded-2xl">
+                <div className="bg-edu-blue text-white p-3 rounded-2xl">
                   <Award size={32} />
                 </div>
                 <div>
-                  <p className="text-xs font-black text-brand-teal uppercase">Qualidade</p>
+                  <p className="text-xs font-black text-edu-blue uppercase">Qualidade</p>
                   <p className="text-xl font-black">100% BNCC</p>
                 </div>
               </div>
             </div>
             
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-amber/20 rounded-full blur-3xl" />
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-edu-amber/20 rounded-full blur-3xl" />
           </motion.div>
         </div>
       </header>
 
-      {/* --- 2. BENEFITS SECTION --- */}
-      <section className="py-24 bg-white border-y border-slate-100 bg-dots">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">O que você ganha ao garantir seu acesso hoje</h2>
-            <p className="text-xl text-text-muted font-medium">Mais do que atividades, entregamos tempo e tranquilidade para o seu dia a dia.</p>
+      {/* --- NEW SECTION: PAIN POINTS --- */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <WaveDivider fillColor="#fff1f2" />
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-10 md:mb-16">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-5xl font-black text-slate-900 tracking-tight px-4"
+            >
+              Por que encontrar bons textos virou um pesadelo? 😫
+            </motion.h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
-            {benefitItems.map((benefit, i) => (
+          <div className="grid md:grid-cols-2 gap-3 md:gap-6">
+            {/* Card 1 */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-[#fee2d5] p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] flex items-start gap-3 md:gap-6 transition-transform hover:scale-[1.02]"
+            >
+              <div className="bg-brand-pink text-white p-2 md:p-3 rounded-xl md:rounded-2xl flex-shrink-0 shadow-lg">
+                <Search className="w-5 h-5 md:w-7 md:h-7" />
+              </div>
+              <div>
+                <h3 className="text-base md:text-xl font-black mb-0.5 md:mb-2 text-slate-900">Textos genéricos do Google</h3>
+                <p className="text-[13px] md:text-base text-slate-600 font-medium leading-relaxed">
+                  Você perde horas procurando e ainda não acha nada com qualidade pedagógica de verdade.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 2 */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-[#ede4f5] p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] flex items-start gap-3 md:gap-6 transition-transform hover:scale-[1.02]"
+            >
+              <div className="bg-brand-pink text-white p-2 md:p-3 rounded-xl md:rounded-2xl flex-shrink-0 shadow-lg">
+                <Frown className="w-5 h-5 md:w-7 md:h-7" />
+              </div>
+              <div>
+                <h3 className="text-base md:text-xl font-black mb-0.5 md:mb-2 text-slate-900">Atividades que não engajam</h3>
+                <p className="text-[13px] md:text-base text-slate-600 font-medium leading-relaxed">
+                  Os alunos fazem por obrigação. Não há interpretação real, só cópia de trecho.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 3 */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-[#fef0c3] p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] flex items-start gap-3 md:gap-6 transition-transform hover:scale-[1.02]"
+            >
+              <div className="bg-brand-pink text-white p-2 md:p-3 rounded-xl md:rounded-2xl flex-shrink-0 shadow-lg">
+                <Clock className="w-5 h-5 md:w-7 md:h-7" />
+              </div>
+              <div>
+                <h3 className="text-base md:text-xl font-black mb-0.5 md:mb-2 text-slate-900">Do zero toda semana</h3>
+                <p className="text-[13px] md:text-base text-slate-600 font-medium leading-relaxed">
+                  Montar atividade do zero consome energia que você precisava para ensinar.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 4 */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="bg-[#cdf3ec] p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] flex items-start gap-3 md:gap-6 transition-transform hover:scale-[1.02]"
+            >
+              <div className="bg-brand-pink text-white p-2 md:p-3 rounded-xl md:rounded-2xl flex-shrink-0 shadow-lg">
+                <FileX className="w-5 h-5 md:w-7 md:h-7" />
+              </div>
+              <div>
+                <h3 className="text-base md:text-xl font-black mb-0.5 md:mb-2 text-slate-900">Fora da BNCC</h3>
+                <p className="text-[13px] md:text-base text-slate-600 font-medium leading-relaxed">
+                  Material bonito mas sem alinhamento curricular deixa você insegura na hora de aplicar.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <motion.a 
+              href="#planos"
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex bg-brand-indigo hover:bg-brand-indigo/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-premium transition-all tracking-wide whitespace-nowrap"
+            >
+              QUERO OS MATERIAIS
+            </motion.a>
+          </div>
+        </div>
+      </section>
+
+      {/* --- NEW SECTION: AUDIENCE --- */}
+      <section className="py-24 bg-soft-pink bg-dots relative overflow-hidden">
+        <WaveDivider fillColor="#fffbeb" />
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-12">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-5xl font-black text-slate-900 mb-4"
+            >
+              Esse kit foi feito para você se...
+            </motion.h2>
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg border-2 border-edu-rose/20"
+            >
+              <Target size={32} className="text-edu-rose" />
+            </motion.div>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              "Você quer atividades de interpretação prontas sem gastar horas pesquisando",
+              "Quer que seus alunos desenvolvam leitura e escrita de verdade, não só copiem",
+              "Precisa de material alinhado à BNCC sem complicação",
+              "Atende do 1º ao 5º ano — ou mais de uma turma ao mesmo tempo",
+              "Está cansada de improvisar na véspera da aula",
+              "Quer economizar tempo sem abrir mão da qualidade pedagógica"
+            ].map((text, idx) => (
               <motion.div
-                key={i}
-                whileHover={{ y: -10 }}
-                className="p-10 rounded-[2.5rem] bg-[#fdfdfd] border border-slate-100 shadow-sm hover:shadow-premium transition-all"
+                key={idx}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-white p-5 md:p-6 rounded-2xl border-l-8 border-edu-rose shadow-sm flex items-center gap-4 group hover:shadow-md transition-shadow"
               >
-                <div className={`${benefit.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm`}>
-                  <DynamicIcon name={benefit.iconName} size={32} />
+                <div className="flex-shrink-0">
+                  <CheckCircle2 size={24} className="text-edu-blue" />
                 </div>
-                <h3 className="text-2xl font-black mb-4">{benefit.title}</h3>
-                <p className="text-text-muted leading-relaxed font-medium">{benefit.desc}</p>
+                <p className="text-slate-700 font-bold text-base md:text-lg leading-tight">
+                  {text}
+                </p>
               </motion.div>
             ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <motion.a 
+              href="#planos"
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex bg-brand-pink hover:bg-brand-pink/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-premium transition-all tracking-wide whitespace-nowrap"
+            >
+              QUERO OS MATERIAIS
+            </motion.a>
+          </div>
+        </div>
+      </section>
+
+      {/* --- NEW SECTION: LIBERDADE --- */}
+      <section className="py-24 bg-soft-cream relative overflow-hidden">
+        <WaveDivider fillColor="#f0f9ff" />
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight"
+            >
+              Não é só material extra. É a sua liberdade de volta. 🕊️
+            </motion.h2>
+          </div>
+
+          <div className="grid gap-3 md:gap-6">
+            {/* Card 1 */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="bg-[#cdf3ec] p-4 md:p-8 rounded-[1.25rem] md:rounded-[2.5rem] flex items-start gap-3 md:gap-8 transition-all hover:shadow-lg"
+            >
+              <div className="bg-edu-blue text-white p-2 md:p-4 rounded-xl md:rounded-2xl flex-shrink-0 shadow-md">
+                <GraduationCap className="w-5 h-5 md:w-8 md:h-8" />
+              </div>
+              <div>
+                <h3 className="text-base md:text-2xl font-black mb-0.5 md:mb-2 text-slate-900">267+ atividades prontas</h3>
+                <p className="text-[12px] md:text-lg text-slate-700 font-medium leading-relaxed">
+                  Interpretação e produção de texto para o ano inteiro — sem improvisar, sem procurar.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 2 */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-[#fef0c3] p-4 md:p-8 rounded-[1.25rem] md:rounded-[2.5rem] flex items-start gap-3 md:gap-8 transition-all hover:shadow-lg"
+            >
+              <div className="bg-edu-blue text-white p-2 md:p-4 rounded-xl md:rounded-2xl flex-shrink-0 shadow-md">
+                <Calendar className="w-5 h-5 md:w-8 md:h-8" />
+              </div>
+              <div>
+                <h3 className="text-base md:text-2xl font-black mb-0.5 md:mb-2 text-slate-900">Textos que prendem de verdade</h3>
+                <p className="text-[12px] md:text-lg text-slate-700 font-medium leading-relaxed">
+                  Selecionados para cada faixa etária, com perguntas que desenvolvem o raciocínio.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 3 */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-[#fee2d5] p-4 md:p-8 rounded-[1.25rem] md:rounded-[2.5rem] flex items-start gap-3 md:gap-8 transition-all hover:shadow-lg"
+            >
+              <div className="bg-edu-blue text-white p-2 md:p-4 rounded-xl md:rounded-2xl flex-shrink-0 shadow-md">
+                <Layers className="w-5 h-5 md:w-8 md:h-8" />
+              </div>
+              <div>
+                <h3 className="text-base md:text-2xl font-black mb-0.5 md:mb-2 text-slate-900">Do 1º ao 5º ano na mesma compra</h3>
+                <p className="text-[12px] md:text-lg text-slate-700 font-medium leading-relaxed">
+                  Material completo para quem atende mais de uma turma ou quer ter tudo em mãos.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 4 */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-[#ede4f5] p-4 md:p-8 rounded-[1.25rem] md:rounded-[2.5rem] flex items-start gap-3 md:gap-8 transition-all hover:shadow-lg"
+            >
+              <div className="bg-[#2DD4BF] text-white p-2 md:p-4 rounded-xl md:rounded-2xl flex-shrink-0 shadow-md">
+                <TrendingUp className="w-5 h-5 md:w-8 md:h-8" />
+              </div>
+              <div>
+                <h3 className="text-base md:text-2xl font-black mb-0.5 md:mb-2 text-slate-900">Pronto para imprimir agora</h3>
+                <p className="text-[12px] md:text-lg text-slate-700 font-medium leading-relaxed">
+                  PDF pronto, funciona em qualquer impressora, colorido ou preto e branco.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <motion.a 
+              href="#planos"
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex bg-brand-indigo hover:bg-brand-indigo/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-premium transition-all tracking-wide whitespace-nowrap"
+            >
+              QUERO OS MATERIAIS
+            </motion.a>
+          </div>
+        </div>
+      </section>
+
+      {/* --- NEW SECTION: KITS SHOWCASE --- */}
+      <section className="py-24 bg-soft-blue relative overflow-hidden">
+        <WaveDivider fillColor="#ffffff" />
+        {/* Background stars pattern */}
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none overflow-hidden">
+           <div className="flex flex-wrap gap-12 p-8 justify-around">
+              {[...Array(60)].map((_, i) => (
+                <Star key={i} size={48} fill="currentColor" className="text-edu-amber" />
+              ))}
+           </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-5xl font-black text-slate-900 mb-4 px-4 leading-tight"
+            >
+              267+ atividades esperando por você ✏️
+            </motion.h2>
+          </div>
+
+          <div className="grid gap-3 md:gap-6">
+            {[
+              { title: "Kit 1º Ano", desc: "Textos curtos com questões de interpretação e propostas de produção para quem está começando a ler.", iconClass: "text-sky-400" },
+              { title: "Kit 2º Ano", desc: "Atividades de compreensão mais elaboradas e escrita criativa com suporte visual.", iconClass: "text-lime-500" },
+              { title: "Kit 3º Ano", desc: "Interpretação aprofundada, produção argumentativa e desafios de escrita para turmas em consolidação.", iconClass: "text-orange-500" },
+              { title: "Kit 4º Ano", desc: "Textos mais longos, inferência e produção textual com começo, meio e fim.", iconClass: "text-rose-500" },
+              { title: "Kit 5º Ano", desc: "Interpretação avançada, gêneros variados e produção argumentativa para fechar o ciclo.", iconClass: "text-indigo-600" },
+              { title: "Visual colorido", desc: "Ilustrações que engajam e motivam — pronto para imprimir e aplicar.", iconClass: "text-orange-400", isPalette: true },
+              { title: "PDF editável", desc: "Personalize se quiser, ou imprima direto do jeito que está.", iconClass: "text-slate-400", isFile: true }
+            ].map((kit, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="bg-white p-4 md:p-8 rounded-[1.25rem] md:rounded-[2.5rem] shadow-sm flex items-center gap-4 md:gap-8 text-left"
+              >
+                <div className="flex-shrink-0">
+                  {kit.isPalette ? (
+                    <Palette size={40} className={`${kit.iconClass} md:scale-125`} />
+                  ) : kit.isFile ? (
+                    <FileText size={40} className={`${kit.iconClass} md:scale-125`} />
+                  ) : (
+                    <div className={`relative ${kit.iconClass}`}>
+                       <BookOpen size={40} className="md:scale-125" />
+                       <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-1.5 h-full bg-white/20 absolute left-2 rounded-full" />
+                       </div>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <h3 className="text-base md:text-2xl font-black text-slate-900 mb-0.5 md:mb-1">{kit.title}</h3>
+                  <p className="text-[12px] md:text-lg text-slate-600 font-medium leading-relaxed">
+                    {kit.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <motion.a 
+              href="#planos"
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex bg-edu-rose hover:bg-edu-rose/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-premium transition-all tracking-wide whitespace-nowrap"
+            >
+              QUERO OS MATERIAIS
+            </motion.a>
           </div>
         </div>
       </section>
 
       {/* --- 3. SOCIAL PROOF (SNEAK PEEK) --- */}
-      <section className="py-24 overflow-hidden">
+      <section className="py-24 overflow-hidden relative bg-white">
+        <WaveDivider fillColor="#f0fdf4" />
         <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row items-end justify-between gap-8">
           <div className="max-w-2xl">
              <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight text-left">Dê uma olhada no que te espera...</h2>
              <div className="flex items-center gap-2">
-                <div className="flex text-brand-amber">
+                <div className="flex text-edu-amber">
                    {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
                 </div>
                 <span className="text-sm font-black text-text-muted uppercase tracking-widest">+8.500 Professoras Satisfeitas</span>
              </div>
           </div>
           <div className="flex gap-4">
-             <div className="p-4 rounded-full border border-slate-200 text-slate-400 hover:text-brand-indigo hover:border-brand-indigo transition-colors cursor-pointer hidden md:block">
+             <div className="p-4 rounded-full border border-slate-200 text-slate-400 hover:text-edu-rose hover:border-edu-rose transition-colors cursor-pointer hidden md:block">
                 <ChevronDown className="rotate-90" />
              </div>
-             <div className="p-4 rounded-full border border-slate-200 text-slate-400 hover:text-brand-indigo hover:border-brand-indigo transition-colors cursor-pointer hidden md:block">
+             <div className="p-4 rounded-full border border-slate-200 text-slate-400 hover:text-edu-rose hover:border-edu-rose transition-colors cursor-pointer hidden md:block">
                 <ChevronDown className="-rotate-90" />
              </div>
           </div>
@@ -370,7 +743,7 @@ export default function App() {
         <motion.div 
            className="flex gap-6 px-6"
            animate={{ x: [0, -1000] }}
-           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
         >
           {sampleImages.map((url, i) => (
             <div key={i} className="flex-shrink-0 w-[300px] h-[420px] bg-white p-3 rounded-[2rem] shadow-xl border border-slate-100 overflow-hidden group">
@@ -378,79 +751,184 @@ export default function App() {
             </div>
           ))}
         </motion.div>
-      </section>
 
-      {/* --- 4. WHAT'S INSIDE --- */}
-      <section className="py-24 bg-slate-900 text-white rounded-[4rem] mx-4 md:mx-10 my-10 overflow-hidden relative bg-grid-white">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-indigo opacity-10 blur-3xl rounded-full translate-x-1/2" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-            <h2 className="text-3xl md:text-6xl font-black mb-16 tracking-tight">O que você estará baixando agora?</h2>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {insideItems.map((item, i) => (
-                <div key={i} className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-left">
-                  <div className="text-brand-indigo mb-6">
-                  <DynamicIcon name={item.iconName} size={40} />
-                </div>
-                  <h3 className="text-xl font-black mb-2">{item.title}</h3>
-                  <p className="text-slate-400 font-medium">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+        <div className="mt-12 text-center">
+          <motion.a 
+            href="#planos"
+            variants={pulseVariants}
+            animate="animate"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex bg-edu-purple hover:bg-edu-purple/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-premium transition-all tracking-wide whitespace-nowrap"
+          >
+            QUERO OS MATERIAIS
+          </motion.a>
         </div>
       </section>
 
-      {/* --- BONUS SECTION --- */}
-      <section className="py-24 bg-brand-indigo/5 relative overflow-hidden bg-dots">
-        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 bg-brand-amber text-white px-5 py-2 rounded-full text-sm font-black uppercase tracking-widest mb-6 shadow-lg shadow-amber-200">
-              <Gift size={18} />
-              <span>Presentes Exclusivos</span>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">O que você ganha de bônus comprando HOJE</h2>
-            <p className="text-xl text-text-muted font-medium">Além das 267 atividades, preparamos recursos extras para facilitar ainda mais sua rotina.</p>
+      {/* --- NEW SECTION: 3 STEPS --- */}
+      <section className="py-24 bg-soft-green relative overflow-hidden">
+        <WaveDivider fillColor="#ffffff" />
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-5xl font-black text-slate-900 mb-4 px-4 leading-tight"
+            >
+              Sua aula pronta em 3 passos 🚀
+            </motion.h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {bonusItems.map((bonus, i) => (
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+            {/* Step 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-[#cdf3ec] p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] flex flex-col items-center text-center group hover:scale-[1.02] transition-transform"
+            >
+              <span className="text-4xl md:text-6xl font-black text-brand-pink/20 mb-[-1.25rem] md:mb-[-2rem] relative z-0">1</span>
+              <div className="bg-edu-rose text-white p-2.5 md:p-3 rounded-2xl shadow-lg relative z-10 mb-4">
+                <Download size={24} strokeWidth={2.5} />
+              </div>
+              <h3 className="text-lg md:text-xl font-black text-slate-900 mb-2">Comprou</h3>
+              <p className="text-slate-600 font-medium text-[13px] md:text-sm leading-relaxed">
+                Acesso imediato ao arquivo após a confirmação do pagamento.
+              </p>
+            </motion.div>
+
+            {/* Step 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-[#fef0c3] p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] flex flex-col items-center text-center group hover:scale-[1.02] transition-transform"
+            >
+              <span className="text-4xl md:text-6xl font-black text-brand-pink/20 mb-[-1.25rem] md:mb-[-2rem] relative z-0">2</span>
+              <div className="bg-edu-rose text-white p-2.5 md:p-3 rounded-2xl shadow-lg relative z-10 mb-4">
+                <Printer size={24} strokeWidth={2.5} />
+              </div>
+              <h3 className="text-lg md:text-xl font-black text-slate-900 mb-2">Imprimiu</h3>
+              <p className="text-slate-600 font-medium text-[13px] md:text-sm leading-relaxed">
+                Funciona em qualquer impressora. Colorido ou preto e branco, fica lindo.
+              </p>
+            </motion.div>
+
+            {/* Step 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-[#fee2d5] p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] flex flex-col items-center text-center group hover:scale-[1.02] transition-transform"
+            >
+              <span className="text-4xl md:text-6xl font-black text-brand-pink/20 mb-[-1.25rem] md:mb-[-2rem] relative z-0">3</span>
+              <div className="bg-edu-rose text-white p-2.5 md:p-3 rounded-2xl shadow-lg relative z-10 mb-4">
+                <Smile size={24} strokeWidth={2.5} />
+              </div>
+              <h3 className="text-lg md:text-xl font-black text-slate-900 mb-2">Aplicou</h3>
+              <p className="text-slate-600 font-medium text-[13px] md:text-sm leading-relaxed">
+                267+ atividades para trabalhar o ano inteiro sem improvisar.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <motion.a 
+              href="#planos"
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex bg-edu-rose hover:bg-edu-rose/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-premium transition-all tracking-wide whitespace-nowrap"
+            >
+              QUERO OS MATERIAIS
+            </motion.a>
+          </div>
+        </div>
+      </section>
+
+      {/* --- NEW SECTION: BONUS --- */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <WaveDivider fillColor="#f8fafc" />
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-5xl font-black text-slate-900 mb-4 px-4 leading-tight"
+            >
+              Quem compra hoje leva o dobro 🎁
+            </motion.h2>
+          </div>
+
+          <div className="grid gap-6 md:gap-8">
+            {bonusCards.map((card, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.02 }}
-                className="bg-white p-10 rounded-[3rem] shadow-premium relative overflow-hidden group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`${card.color} p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] relative flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow group`}
               >
-                <div className="absolute top-0 right-0 p-4 bg-brand-amber/10 text-brand-amber font-black text-xs rounded-bl-2xl">
-                  GRÁTIS
+                <div className={`absolute top-4 right-4 ${card.badgeColor} text-white text-[9px] md:text-[10px] font-black px-3 py-1 rounded-full tracking-widest leading-none uppercase`}>
+                  {card.badge}
                 </div>
-                <div className="text-brand-amber mb-6">
-                  <DynamicIcon name={bonus.iconName} className="w-10 h-10" />
+                
+                <div className={`mb-2 ${card.iconColor}`}>
+                   <DynamicIcon name={card.iconName} size={32} />
                 </div>
-                <p className="text-xs font-black tracking-widest text-brand-amber mb-4 uppercase">{bonus.tag}</p>
-                <h3 className="text-2xl font-black mb-4">{bonus.title}</h3>
-                <p className="text-text-muted font-medium leading-relaxed">{bonus.desc}</p>
+
+                <h3 className="text-[18px] md:text-xl font-black text-slate-900 mb-2">{card.title}</h3>
+                <p className="text-slate-600 font-medium text-[13px] md:text-sm leading-relaxed mb-6 max-w-2xl">
+                  {card.desc}
+                </p>
+                <span className="text-edu-rose font-bold md:text-lg border-t border-edu-rose/10 pt-4 w-full max-w-[140px]">
+                  {card.value}
+                </span>
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-20 text-center">
+          <div className="mt-10 text-center">
             <motion.a 
               href="#planos"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              whileHover={{ scale: 1.15 }}
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex bg-brand-pink hover:bg-brand-pink/90 text-white px-8 sm:px-16 py-5 rounded-full font-black text-xl sm:text-2xl shadow-premium transition-all tracking-wide"
+              className="inline-flex bg-edu-purple hover:bg-edu-purple/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-premium transition-all tracking-wide whitespace-nowrap"
             >
-              QUERO TODOS OS BÔNUS AGORA
+              QUERO OS MATERIAIS
             </motion.a>
           </div>
+
+          <div className="text-center mt-20">
+             <motion.h3
+               initial={{ opacity: 0 }}
+               whileInView={{ opacity: 1 }}
+               viewport={{ once: true }}
+               className="text-2xl md:text-4xl font-black text-slate-900 flex items-center justify-center gap-3"
+             >
+               Tudo isso incluso no seu kit hoje ✨
+             </motion.h3>
+          </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
+
+
+
+
+
       {/* --- TESTIMONIALS SECTION --- */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-soft-blue relative overflow-hidden">
+        <WaveDivider fillColor="#f0f9ff" />
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-20">
             <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">O que dizem as professoras</h2>
@@ -460,7 +938,7 @@ export default function App() {
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((t, i) => (
               <div key={i} className="p-10 rounded-[3rem] bg-[#fafafa] border border-slate-100 flex flex-col h-full">
-                <div className="flex text-brand-amber mb-6">
+                <div className="flex text-edu-amber mb-6">
                   {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
                 </div>
                 <p className="text-lg font-medium italic text-text-dark leading-relaxed mb-10 flex-grow">
@@ -476,118 +954,155 @@ export default function App() {
               </div>
             ))}
           </div>
+
+          <div className="mt-12 text-center">
+            <motion.a 
+              href="#planos"
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex bg-edu-rose hover:bg-edu-rose/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-premium transition-all tracking-wide whitespace-nowrap"
+            >
+              QUERO OS MATERIAIS
+            </motion.a>
+          </div>
         </div>
       </section>
 
-      {/* --- 5. OFFER SECTION (RE-DESIGNED CARDS) --- */}
-      <section id="planos" className="py-32 bg-[#fafafa] bg-grid">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">Comece agora mesmo</h2>
-            <p className="text-xl text-text-muted font-medium">Invista na sua carreira e na qualidade das suas aulas com um valor simbólico.</p>
+      {/* --- 5. OFFER SECTION --- */}
+      <section id="planos" className="py-20 md:py-32 bg-soft-blue bg-grid relative overflow-hidden">
+        <WaveDivider fillColor="#fff1f2" />
+        <div className="max-w-4xl mx-auto px-4 md:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20 px-4">
+            <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">Comece agora mesmo</h2>
+            <p className="text-lg md:text-xl text-text-muted font-medium italic">Invista na sua carreira e na qualidade das suas aulas com um valor simbólico.</p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-stretch max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-10 max-w-3xl md:max-w-5xl mx-auto items-stretch">
             {/* Standard Tier */}
             <motion.div 
                whileHover={{ y: -5 }}
-               className="bg-white rounded-[3rem] p-10 md:p-14 border border-slate-200 flex flex-col items-center text-center shadow-sm relative overflow-hidden"
+               className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-200 flex flex-col items-center text-center shadow-sm relative overflow-hidden"
             >
-              <div className="mb-10">
-                <span className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-4 block">Kit Essencial</span>
-                <p className="text-text-muted line-through font-bold text-lg mb-2">De R$19,90</p>
+              <div className="mb-10 text-center">
+                <p className="text-text-muted line-through font-bold text-lg mb-2">De R$50,70</p>
                 <div className="flex items-center justify-center gap-1">
-                  <span className="text-4xl font-black">R$</span>
-                  <span className="text-8xl font-black tracking-tighter">9,90</span>
+                  <span className="text-5xl font-black text-edu-rose tracking-tight">R$17,90</span>
                 </div>
               </div>
 
               <div className="space-y-4 mb-12 w-full text-left">
                 {[
-                  "267+ Atividades (1º ao 5º ano)",
-                  "PDF Pronto para Imprimir",
-                  "Gabarito Completo",
-                  "Ficha de Progresso Individual",
-                  "Acesso Vitalício"
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <CheckCircle2 size={18} className="text-brand-teal" />
-                    <span className="font-bold text-slate-600">{feature}</span>
+                  { text: "267+ atividades de interpretação e produção de texto", status: "checked" },
+                  { text: "Do 1º ao 5º ano", status: "checked" },
+                  { text: "PDF editável — imprime quantas vezes quiser", status: "checked" },
+                  { text: "Gabarito completo (Bônus)", status: "checked" },
+                  { text: "Ficha de acompanhamento de leitura (Bônus)", status: "checked" },
+                  { text: "Sequência didática sugerida (Bônus)", status: "checked" },
+                  { text: "Acesso vitalício", status: "checked" },
+                  { text: "Atividades de Leitura Fluente (1º ao 5º ano)", status: "locked" },
+                  { text: "Gêneros Textuais completos — fábula, poema, notícia, carta, conto e mais", status: "locked" },
+                ].map((item, i) => (
+                  <div key={i} className={`flex items-start gap-2.5 ${item.status === 'locked' ? 'opacity-40' : ''}`}>
+                    <div className="flex-shrink-0 mt-0.5">
+                      {item.status === 'checked' ? (
+                        <div className="bg-brand-teal text-white rounded-full p-0.5">
+                          <Check size={12} strokeWidth={4} />
+                        </div>
+                      ) : (
+                        <Lock size={14} className="text-slate-400" />
+                      )}
+                    </div>
+                    <span className={`font-bold text-[13px] md:text-sm ${item.status === 'checked' ? 'text-slate-700' : 'text-slate-500'}`}>
+                      {item.text}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              <motion.a 
+                <motion.a 
                 href={appendUTMs("https://pay.lowify.com.br/checkout?product_id=tH3CLD")}
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white px-4 sm:px-8 py-5 rounded-full font-black text-lg sm:text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center tracking-wide"
+                variants={pulseVariants}
+                animate="animate"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-[#34bba7] hover:bg-[#2da695] text-white px-4 py-3.5 md:py-4 rounded-xl font-black text-sm md:text-base shadow-md transition-all flex items-center justify-center text-center tracking-tight whitespace-nowrap"
               >
-                RECEBER MATERIAL BÁSICO
+                Quero o Kit Essencial →
               </motion.a>
-              <p className="mt-6 text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                 <Shield size={14} /> Pagamento 100% Seguro
-              </p>
+
+              <motion.button 
+                onClick={() => document.getElementById('offer-recommended')?.scrollIntoView({ behavior: 'smooth' })}
+                variants={pulseVariants}
+                animate="animate"
+                className="mt-6 w-full py-4 border-2 border-dashed border-amber-200 bg-amber-50/30 text-slate-600 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-amber-50 transition-colors"
+                whileHover={{ scale: 1.05 }}
+              >
+                <ChevronDown size={18} /> Veja a oferta recomendada <ChevronDown size={18} />
+              </motion.button>
             </motion.div>
 
             {/* Premium Tier */}
             <motion.div 
+               id="offer-recommended"
                whileHover={{ y: -5 }}
-               className="bg-white rounded-[3rem] p-10 md:p-14 border-4 border-brand-indigo flex flex-col items-center text-center shadow-premium relative overflow-hidden group"
+               className="bg-white rounded-[2.5rem] p-6 md:p-10 border-[3px] border-edu-purple/50 flex flex-col items-center text-center shadow-2xl relative overflow-hidden group"
             >
-              <div className="absolute top-0 right-0 bg-brand-indigo text-white px-6 py-2 rounded-bl-3xl font-black text-xs uppercase tracking-widest">
-                MAIS ESCOLHIDO
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-edu-purple/5 to-transparent pointer-events-none" />
               
-              <div className="mb-10">
-                <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-indigo mb-4 block">Combo Mestre do Texto</span>
-                <p className="text-text-muted line-through font-bold text-lg mb-2">De R$29,90</p>
+              <div className="mb-10 text-center relative z-10">
+                <h3 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-r from-edu-purple to-edu-rose bg-clip-text text-transparent tracking-tighter">
+                  Kit Premium
+                </h3>
+                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-edu-purple/60 mb-6 block">267+ ATIVIDADES + BÔNUS EXCLUSIVOS</span>
+                
+                <p className="text-text-muted line-through font-bold text-lg mb-2">De R$80,00</p>
                 <div className="flex items-center justify-center gap-1">
-                  <span className="text-4xl font-black text-brand-indigo">R$</span>
-                  <span className="text-8xl font-black tracking-tighter text-brand-indigo">17,90</span>
+                  <span className="text-6xl md:text-7xl font-black text-edu-purple tracking-tighter">R$26,90</span>
                 </div>
-                <div className="mt-4 inline-block bg-brand-amber/10 text-brand-amber px-4 py-1 rounded-full text-xs font-black">
-                   ECONOMIZE R$12,00 HOJE
+                <div className="mt-4 inline-block bg-edu-amber text-slate-900 px-6 py-2 rounded-full text-xs md:text-sm font-black shadow-sm">
+                   Você economiza R$53,10
                 </div>
               </div>
 
               <div className="space-y-4 mb-12 w-full text-left">
-                <div className="flex items-center gap-3 pb-4 mb-4 border-b border-indigo-50">
-                   <div className="p-2 rounded-xl bg-brand-indigo text-white">
-                      <Zap size={20} />
-                   </div>
-                   <span className="font-black text-brand-indigo">Tudo do Kit Essencial +</span>
-                </div>
                 {[
-                  "Pack: Fluência Leitora (Focado)",
-                  "Pack: Gêneros Textuais BNCC",
-                  "Atividades de Escrita Criativa",
-                  "Certificado de Conclusão",
-                  "Prioridade no Suporte"
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <CheckCircle2 size={18} className="text-brand-indigo" />
-                    <span className="font-bold text-slate-800">{feature}</span>
+                  { text: "Tudo do Kit Essencial", status: "checked" },
+                  { text: "✨ BÔNUS EXCLUSIVO: Atividades de Leitura Fluente (1º ao 5º ano)", status: "checked" },
+                  { text: "✨ BÔNUS EXCLUSIVO: Gêneros Textuais completos — fábula, poema, notícia, carta, conto, tirinha e mais (1º ao 5º ano)", status: "checked" },
+                  { text: "Alinhado 100% à BNCC", status: "checked" },
+                  { text: "PDF editável — imprime quantas vezes quiser", status: "checked" },
+                  { text: "Acesso vitalício", status: "checked" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-2.5">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="bg-brand-indigo text-white rounded-full p-0.5">
+                        <Check size={12} strokeWidth={4} />
+                      </div>
+                    </div>
+                    <span className="font-bold text-[13px] md:text-sm text-slate-700">
+                      {item.text}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              <motion.a 
+                <motion.a 
                 href={checkoutUrl}
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white px-4 sm:px-8 py-5 rounded-full font-black text-lg sm:text-xl md:text-2xl shadow-premium transition-all flex items-center justify-center text-center tracking-wide"
+                variants={pulseVariants}
+                animate="animate"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white px-4 py-3.5 md:py-4 rounded-xl font-black text-sm md:text-base shadow-md transition-all flex items-center justify-center text-center tracking-tight whitespace-nowrap"
               >
-                RECEBER MATERIAL COMPLETO
+                Quero o Kit Premium por R$26,90 →
               </motion.a>
-              <div className="mt-6 flex flex-col items-center gap-3">
-                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <ShieldCheck size={14} className="text-brand-teal" /> Garantia de 90 Dias Incondicional
-                 </p>
+              
+              <div className="mt-6 flex items-center justify-center gap-2 text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wide">
+                 <span>🔒 Compra segura</span>
+                 <span className="text-slate-200">•</span>
+                 <span>Download imediato</span>
               </div>
             </motion.div>
           </div>
@@ -595,15 +1110,16 @@ export default function App() {
       </section>
 
       {/* --- 90-DAY GUARANTEE --- */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="relative p-8 md:p-16 bg-white rounded-3xl border-2 border-brand-teal/20 shadow-2xl flex flex-col md:flex-row items-center gap-8 md:gap-12">
+      <section className="py-24 bg-soft-pink relative overflow-hidden">
+        <WaveDivider fillColor="#ffffff" />
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <div className="relative p-8 md:p-16 bg-white rounded-3xl border-2 border-edu-blue/20 shadow-2xl flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40">
               <img src="https://i.ibb.co/Y4BKz5LY/1000239986-1.png" alt="Garantia 90 Dias" className="w-full h-full object-contain" />
             </div>
             <div className="flex-1 text-center md:text-left">
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                Garantia Incondicional de <span className="text-brand-teal">90 Dias</span>
+                Garantia Incondicional de <span className="text-edu-blue">90 Dias</span>
               </h2>
               <p className="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed">
                 Adquira seu material hoje com total segurança. Se em até 90 dias você sentir que o conteúdo não é para você, devolvemos <strong>100% do seu investimento</strong>. Sem perguntas, sem burocracia, risco totalmente nosso.
@@ -611,6 +1127,18 @@ export default function App() {
               <div className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-black text-lg shadow-lg">
                 <ShieldCheck size={24} />
                 <span>Risco Zero | Satisfação Garantida</span>
+              </div>
+              <div className="mt-10">
+                <motion.a 
+                  href="#planos"
+                  variants={pulseVariants}
+                  animate="animate"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex bg-edu-blue hover:bg-edu-blue/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-lg transition-all tracking-wide whitespace-nowrap"
+                >
+                  TESTAR POR 90 DIAS AGORA
+                </motion.a>
               </div>
             </div>
           </div>
@@ -638,7 +1166,7 @@ export default function App() {
                   <motion.div
                     animate={{ rotate: openFaq === index ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="text-brand-indigo"
+                    className="text-edu-purple"
                   >
                     <ChevronDown size={24} />
                   </motion.div>
@@ -660,7 +1188,18 @@ export default function App() {
             ))}
           </div>
 
-
+          <div className="mt-12 text-center">
+            <motion.a 
+              href="#planos"
+              variants={pulseVariants}
+              animate="animate"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex bg-edu-purple hover:bg-edu-purple/90 text-white px-8 py-3.5 rounded-full font-black text-sm md:text-base shadow-lg transition-all tracking-wide whitespace-nowrap"
+            >
+              AINDA TEM DÚVIDA? FALE CONOSCO
+            </motion.a>
+          </div>
         </div>
       </section>
 
