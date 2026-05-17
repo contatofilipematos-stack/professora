@@ -45,7 +45,7 @@ import {
   X,
   MessageSquare
 } from "lucide-react";
-import { saveUTMs, appendUTMs } from "./lib/utm";
+import { saveUTMs, appendUTMs, trackInitiateCheckout } from "./lib/utm";
 
 // Safe JSON.stringify for external scripts (like utmify) that might hit circular structures or cross-origin issues
 if (typeof window !== 'undefined') {
@@ -230,6 +230,15 @@ const sampleImages = [
   "https://i.ibb.co/GfYNwBXB/amostra-6-C9-SVogpo.png",
   "https://i.ibb.co/v4MpVCyN/amostra-1-Bb7-Emq4-H.png",
   "https://i.ibb.co/Z6cpC5wC/amostra-2-DCxhnge-K.png",
+];
+
+const testimonialProofImages = [
+  "https://i.ibb.co/QvN619x9/h-YXWJKI.jpg",
+  "https://i.ibb.co/FrNGRYt/GO39zxz.jpg",
+  "https://i.ibb.co/WpBTS9nN/mv-Uf64E.jpg",
+  "https://i.ibb.co/QvN619x9/h-YXWJKI.jpg",
+  "https://i.ibb.co/FrNGRYt/GO39zxz.jpg",
+  "https://i.ibb.co/WpBTS9nN/mv-Uf64E.jpg",
 ];
 
 const IconMap: Record<string, any> = {
@@ -954,53 +963,18 @@ export default function App() {
             <p className="text-lg text-text-muted font-medium">Quem já baixou e aplica em sala de aula todos os dias.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`p-8 md:p-10 rounded-[2rem] bg-white border border-slate-100 flex flex-col h-full shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow ${i === 1 ? 'md:-translate-y-4' : ''}`}
-              >
-                {/* Decorative Quote Icon */}
-                <div className="absolute top-6 right-8 text-edu-blue/10 group-hover:text-edu-blue/20 transition-colors">
-                  <Quote size={80} fill="currentColor" />
+          <div className="mb-20 overflow-hidden">
+            <motion.div 
+               className="flex gap-6"
+               animate={{ x: [0, -1200] }}
+               transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+            >
+              {[...testimonialProofImages, ...testimonialProofImages].map((url, i) => (
+                <div key={i} className="flex-shrink-0 w-[280px] md:w-[350px] bg-white p-2 rounded-2xl shadow-lg border border-slate-100 overflow-hidden group">
+                  <img src={url} className="w-full h-auto rounded-xl group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 </div>
-
-                <div className="flex text-edu-amber mb-6 relative z-10">
-                  {[...Array(5)].map((_, idx) => <Star key={idx} size={16} fill="currentColor" />)}
-                </div>
-
-                <div className="relative z-10 flex-grow">
-                  <p className="text-xl md:text-2xl font-serif italic text-slate-800 leading-relaxed mb-10">
-                    "{t.text}"
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-4 border-t border-slate-100 pt-8 relative z-10 mt-auto">
-                  <div className="relative">
-                    <img 
-                      src={t.image} 
-                      alt={t.name} 
-                      className="w-14 h-14 rounded-2xl object-cover shadow-sm bg-slate-200 border-2 border-white ring-1 ring-slate-100" 
-                      referrerPolicy="no-referrer" 
-                    />
-                    <div className="absolute -bottom-1 -right-1 bg-edu-green text-white p-1 rounded-full shadow-sm">
-                      <Check size={10} strokeWidth={4} />
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-black text-slate-900 text-base">{t.name}</h4>
-                    <div className="flex items-center gap-1.5 opacity-70">
-                      <GraduationCap size={12} className="text-edu-blue" />
-                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{t.role}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+              ))}
+            </motion.div>
           </div>
 
           <div className="mt-12 text-center">
@@ -1077,6 +1051,7 @@ export default function App() {
               <div className="w-full mt-auto">
                 <motion.a 
                   href={appendUTMs("https://pay.lowify.com.br/checkout?product_id=tH3CLD")}
+                  onClick={() => trackInitiateCheckout()}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-slate-800 hover:bg-slate-900 text-white px-4 py-4 md:py-5 rounded-xl font-black text-sm md:text-base transition-all flex items-center justify-center text-center tracking-tight"
@@ -1160,6 +1135,7 @@ export default function App() {
               <div className="w-full mt-auto relative z-10">
                 <motion.a 
                   href={checkoutUrl}
+                  onClick={() => trackInitiateCheckout()}
                   variants={pulseVariants}
                   animate="animate"
                   whileHover={{ scale: 1.05 }}

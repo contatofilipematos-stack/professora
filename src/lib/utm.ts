@@ -32,3 +32,26 @@ export function appendUTMs(url: string) {
 
   return finalUrl.toString();
 }
+
+export function trackInitiateCheckout() {
+  if (typeof window !== 'undefined') {
+    try {
+      // Standard Meta Pixel / UTMfy proxy
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'InitiateCheckout');
+      }
+      
+      // UTMfy specific tracker
+      if ((window as any).vmPix) {
+        (window as any).vmPix('track', 'InitiateCheckout');
+      }
+      
+      // Some UTMfy setups use this for manual events
+      if ((window as any).utmify && (window as any).utmify.track) {
+        (window as any).utmify.track('InitiateCheckout');
+      }
+    } catch (e) {
+      console.error('Error tracking InitiateCheckout:', e);
+    }
+  }
+}
