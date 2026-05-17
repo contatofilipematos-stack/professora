@@ -23,6 +23,7 @@ import {
   Award,
   Files,
   Gift,
+  Quote,
   CalendarDays,
   ClipboardCheck,
   Palette,
@@ -937,31 +938,66 @@ export default function App() {
 
 
       {/* --- TESTIMONIALS SECTION --- */}
-      <section className="py-24 bg-soft-blue relative overflow-hidden">
+      <section className="py-24 bg-soft-blue relative overflow-hidden bg-grid">
+        <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent h-40 pointer-events-none" />
         <WaveDivider fillColor="#f0f9ff" />
-        <div className="max-w-7xl mx-auto px-6">
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">O que dizem as professoras</h2>
+            <div className="inline-flex items-center gap-2 bg-edu-amber/10 text-edu-amber px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+              <Users size={14} />
+              <span>Comunidade Ativa</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">O que dizem as professoras</h2>
             <p className="text-lg text-text-muted font-medium">Quem já baixou e aplica em sala de aula todos os dias.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((t, i) => (
-              <div key={i} className="p-10 rounded-[3rem] bg-[#fafafa] border border-slate-100 flex flex-col h-full">
-                <div className="flex text-edu-amber mb-6">
-                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`p-8 md:p-10 rounded-[2rem] bg-white border border-slate-100 flex flex-col h-full shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow ${i === 1 ? 'md:-translate-y-4' : ''}`}
+              >
+                {/* Decorative Quote Icon */}
+                <div className="absolute top-6 right-8 text-edu-blue/10 group-hover:text-edu-blue/20 transition-colors">
+                  <Quote size={80} fill="currentColor" />
                 </div>
-                <p className="text-lg font-medium italic text-text-dark leading-relaxed mb-10 flex-grow">
-                  "{t.text}"
-                </p>
-                <div className="flex items-center gap-4 border-t border-slate-200 pt-8">
-                  <img src={t.image} alt={t.name} className="w-14 h-14 rounded-full object-cover shadow-sm bg-slate-200" referrerPolicy="no-referrer" />
+
+                <div className="flex text-edu-amber mb-6 relative z-10">
+                  {[...Array(5)].map((_, idx) => <Star key={idx} size={16} fill="currentColor" />)}
+                </div>
+
+                <div className="relative z-10 flex-grow">
+                  <p className="text-xl md:text-2xl font-serif italic text-slate-800 leading-relaxed mb-10">
+                    "{t.text}"
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-4 border-t border-slate-100 pt-8 relative z-10 mt-auto">
+                  <div className="relative">
+                    <img 
+                      src={t.image} 
+                      alt={t.name} 
+                      className="w-14 h-14 rounded-2xl object-cover shadow-sm bg-slate-200 border-2 border-white ring-1 ring-slate-100" 
+                      referrerPolicy="no-referrer" 
+                    />
+                    <div className="absolute -bottom-1 -right-1 bg-edu-green text-white p-1 rounded-full shadow-sm">
+                      <Check size={10} strokeWidth={4} />
+                    </div>
+                  </div>
                   <div>
-                    <p className="font-black text-text-dark">{t.name}</p>
-                    <p className="text-xs font-black uppercase tracking-widest text-text-muted">{t.role}</p>
+                    <h4 className="font-black text-slate-900 text-base">{t.name}</h4>
+                    <div className="flex items-center gap-1.5 opacity-70">
+                      <GraduationCap size={12} className="text-edu-blue" />
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{t.role}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
