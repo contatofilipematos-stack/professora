@@ -53,8 +53,11 @@ export function trackInitiateCheckout(url?: string) {
     } catch (e) {
       console.error('Error tracking InitiateCheckout:', e);
     } finally {
+      // Adiciona um pequeno atraso para garantir que a solicitação de rastreamento tenha tempo de iniciar
       if (url) {
-        window.location.href = url;
+        setTimeout(() => {
+          window.location.href = url;
+        }, 300);
       }
     }
   }
