@@ -33,6 +33,21 @@ export function appendUTMs(url: string) {
   return finalUrl.toString();
 }
 
+export function redirectWithParams(destination: string) {
+  const currentParams = window.location.search;
+
+  if (!currentParams) {
+    window.location.href = destination;
+    return;
+  }
+
+  if (destination.includes("?")) {
+    window.location.href = destination + "&" + currentParams.substring(1);
+  } else {
+    window.location.href = destination + currentParams;
+  }
+}
+
 export function trackInitiateCheckout(url?: string) {
   if (typeof window !== 'undefined') {
     try {
@@ -56,7 +71,7 @@ export function trackInitiateCheckout(url?: string) {
       // Adiciona um pequeno atraso para garantir que a solicitação de rastreamento tenha tempo de iniciar
       if (url) {
         setTimeout(() => {
-          window.location.href = url;
+          redirectWithParams(url);
         }, 300);
       }
     }
