@@ -998,7 +998,7 @@ export default function App() {
               <div className="mb-10 text-center">
                 <p className="text-text-muted line-through font-bold text-lg mb-2">De R$50,70</p>
                 <div className="flex items-center justify-center gap-1">
-                  <span className="text-5xl font-black text-edu-rose tracking-tight">R$17,90</span>
+                  <span className="text-5xl font-black text-edu-rose tracking-tight">R$9,90</span>
                 </div>
               </div>
 
@@ -1077,10 +1077,10 @@ export default function App() {
                 
                 <p className="text-text-muted line-through font-bold text-lg mb-2">De R$80,00</p>
                 <div className="flex items-center justify-center gap-1">
-                  <span className="text-6xl md:text-7xl font-black text-edu-purple tracking-tighter">R$26,90</span>
+                  <span className="text-6xl md:text-7xl font-black text-edu-purple tracking-tighter">R$19,90</span>
                 </div>
                 <div className="mt-4 inline-block bg-edu-amber text-slate-900 px-6 py-2 rounded-full text-xs md:text-sm font-black shadow-sm">
-                   Você economiza R$53,10
+                   Você economiza R$60,10
                 </div>
               </div>
 
@@ -1114,7 +1114,7 @@ export default function App() {
                 whileTap={{ scale: 0.98 }}
                 className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white px-4 py-3.5 md:py-4 rounded-xl font-black text-sm md:text-base shadow-md transition-all flex items-center justify-center text-center tracking-tight whitespace-nowrap"
               >
-                Quero o Kit Premium por R$26,90 →
+                Quero o Kit Premium por R$19,90 →
               </motion.a>
               
               <div className="mt-6 flex items-center justify-center gap-2 text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wide">
