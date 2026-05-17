@@ -41,7 +41,9 @@ import {
   GraduationCap,
   Calendar,
   Check,
-  Lock
+  Lock,
+  X,
+  MessageSquare
 } from "lucide-react";
 import { saveUTMs, appendUTMs } from "./lib/utm";
 
@@ -1031,61 +1033,71 @@ export default function App() {
                whileHover={{ y: -5 }}
                className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-200 flex flex-col items-center text-center shadow-sm relative overflow-hidden"
             >
-              <div className="mb-10 text-center">
-                <p className="text-text-muted line-through font-bold text-lg mb-2">De R$50,70</p>
-                <div className="flex items-center justify-center gap-1">
-                  <span className="text-5xl font-black text-edu-rose tracking-tight">R$9,90</span>
+              <div className="mb-10 text-center w-full">
+                <h3 className="text-2xl md:text-3xl font-black mb-1 text-slate-800 tracking-tight">Kit Essencial</h3>
+                <span className="text-[10px] font-black uppercase tracking-[0.1em] text-slate-400 mb-8 block">O BÁSICO PARA COMEÇAR</span>
+                
+                <div className="bg-slate-50 rounded-3xl p-6 mb-8 border border-slate-100 flex flex-col items-center justify-center">
+                  <p className="text-text-muted line-through font-bold text-base mb-1">De R$50,70</p>
+                  <div className="flex flex-col items-center justify-center">
+                    <span className="text-4xl md:text-5xl font-black text-edu-rose tracking-tight leading-none mb-1">R$9,90</span>
+                    <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Pagamento Único</span>
+                  </div>
                 </div>
               </div>
 
               <div className="space-y-4 mb-12 w-full text-left">
                 {[
-                  { text: "267+ atividades de interpretação e produção de texto", status: "checked" },
-                  { text: "Do 1º ao 5º ano", status: "checked" },
-                  { text: "PDF editável — imprime quantas vezes quiser", status: "checked" },
-                  { text: "Gabarito completo (Bônus)", status: "checked" },
-                  { text: "Ficha de acompanhamento de leitura (Bônus)", status: "checked" },
-                  { text: "Sequência didática sugerida (Bônus)", status: "checked" },
+                  { text: "267+ atividades (1º ao 5º ano)", status: "checked" },
+                  { text: "PDF editável para impressão", status: "checked" },
+                  { text: "Gabarito completo (BÔNUS)", status: "checked" },
+                  { text: "Ficha de acompanhamento (BÔNUS)", status: "checked" },
                   { text: "Acesso vitalício", status: "checked" },
-                  { text: "Atividades de Leitura Fluente (1º ao 5º ano)", status: "locked" },
-                  { text: "Gêneros Textuais completos — fábula, poema, notícia, carta, conto e mais", status: "locked" },
+                  { text: "Leitura Fluente e Gêneros Textuais", status: "locked" },
                 ].map((item, i) => (
-                  <div key={i} className={`flex items-start gap-2.5 ${item.status === 'locked' ? 'opacity-40' : ''}`}>
+                  <div key={i} className={`flex items-start gap-2.5 ${item.status === 'locked' ? 'opacity-30' : ''}`}>
                     <div className="flex-shrink-0 mt-0.5">
                       {item.status === 'checked' ? (
-                        <div className="bg-brand-teal text-white rounded-full p-0.5">
+                        <div className="bg-edu-rose/20 text-edu-rose rounded-full p-0.5">
                           <Check size={12} strokeWidth={4} />
                         </div>
                       ) : (
-                        <Lock size={14} className="text-slate-400" />
+                        <div className="text-slate-300">
+                          <X size={14} strokeWidth={3} />
+                        </div>
                       )}
                     </div>
-                    <span className={`font-bold text-[13px] md:text-sm ${item.status === 'checked' ? 'text-slate-700' : 'text-slate-500'}`}>
+                    <span className={`font-bold text-[13px] md:text-sm ${item.status === 'checked' ? 'text-slate-600' : 'text-slate-400'}`}>
                       {item.text}
                     </span>
                   </div>
                 ))}
               </div>
 
+              <div className="w-full mt-auto">
                 <motion.a 
-                href={appendUTMs("https://pay.lowify.com.br/checkout?product_id=tH3CLD")}
-                variants={pulseVariants}
-                animate="animate"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-[#34bba7] hover:bg-[#2da695] text-white px-4 py-3.5 md:py-4 rounded-xl font-black text-sm md:text-base shadow-md transition-all flex items-center justify-center text-center tracking-tight whitespace-nowrap"
-              >
-                Quero o Kit Essencial →
-              </motion.a>
+                  href={appendUTMs("https://pay.lowify.com.br/checkout?product_id=tH3CLD")}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-slate-800 hover:bg-slate-900 text-white px-4 py-4 md:py-5 rounded-xl font-black text-sm md:text-base transition-all flex items-center justify-center text-center tracking-tight"
+                >
+                  QUERO O KIT ESSENCIAL →
+                </motion.a>
+                
+                <div className="mt-8 flex flex-col items-center gap-3">
+                  <div className="flex items-center justify-center gap-1.5 text-[9px] font-bold text-slate-300 uppercase tracking-widest">
+                    <Lock size={10} />
+                    Compra Segura
+                  </div>
+                </div>
+              </div>
 
               <motion.button 
                 onClick={() => document.getElementById('offer-recommended')?.scrollIntoView({ behavior: 'smooth' })}
-                variants={pulseVariants}
-                animate="animate"
-                className="mt-6 w-full py-4 border-2 border-dashed border-amber-200 bg-amber-50/30 text-slate-600 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-amber-50 transition-colors"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
+                className="mt-6 w-full py-3 px-4 border border-dashed border-edu-purple/30 bg-edu-purple/5 text-edu-purple rounded-xl font-bold text-[10px] flex items-center justify-center gap-2 hover:bg-edu-purple/10 transition-colors uppercase tracking-widest"
               >
-                <ChevronDown size={18} /> Veja a oferta recomendada <ChevronDown size={18} />
+                <ChevronDown size={14} /> Compare com Premium <ChevronDown size={14} />
               </motion.button>
             </motion.div>
 
@@ -1093,12 +1105,12 @@ export default function App() {
             <motion.div 
                id="offer-recommended"
                whileHover={{ y: -5 }}
-               className="bg-white rounded-[2.5rem] p-6 md:p-10 border-[3px] border-edu-purple/50 flex flex-col items-center text-center shadow-2xl relative overflow-hidden group"
+               className="bg-white rounded-[2.5rem] p-6 md:p-10 border-[4px] border-edu-purple flex flex-col items-center text-center shadow-2xl relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-edu-purple/5 to-transparent pointer-events-none" />
               
-              <div className="mb-10 text-center relative z-10">
-                <div className="mb-6 w-full max-w-[280px] mx-auto">
+              <div className="mb-10 text-center relative z-10 w-full">
+                <div className="mb-6 w-full max-w-[280px] mx-auto transition-transform group-hover:scale-105 duration-700">
                   <img 
                     src="https://i.ibb.co/GvmX8TyT/Whats-App-Image-2026-05-16-at-11-02-47.jpg" 
                     alt="Kit Premium Mockup" 
@@ -1109,31 +1121,34 @@ export default function App() {
                 <h3 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-r from-edu-purple to-edu-rose bg-clip-text text-transparent tracking-tighter">
                   Kit Premium
                 </h3>
-                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-edu-purple/60 mb-6 block">267+ ATIVIDADES + BÔNUS EXCLUSIVOS</span>
+                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-edu-purple/60 mb-8 block">267+ ATIVIDADES + TODOS OS BÔNUS</span>
                 
-                <p className="text-text-muted line-through font-bold text-lg mb-2">De R$80,00</p>
-                <div className="flex items-center justify-center gap-1">
-                  <span className="text-6xl md:text-7xl font-black text-edu-purple tracking-tighter">R$19,90</span>
+                <div className="bg-edu-rose/5 rounded-3xl p-6 mb-8 border border-edu-rose/10 flex flex-col items-center justify-center">
+                  <p className="text-text-muted line-through font-bold text-lg mb-1">De R$80,00</p>
+                  <div className="flex flex-col items-center justify-center">
+                    <span className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Por apenas:</span>
+                    <span className="text-6xl md:text-7xl font-black text-edu-purple tracking-tighter leading-none mb-2">R$19,90</span>
+                    <span className="text-[10px] font-black text-edu-rose uppercase tracking-[0.2em]">Pagamento Único</span>
+                  </div>
                 </div>
-                <div className="mt-4 inline-block bg-edu-amber text-slate-900 px-6 py-2 rounded-full text-xs md:text-sm font-black shadow-sm">
-                   Você economiza R$60,10
+
+                <div className="inline-flex items-center gap-2 bg-edu-amber text-slate-900 px-6 py-2 rounded-full text-xs font-black shadow-lg animate-pulse mb-8">
+                   <Clock size={16} /> OFERTA POR TEMPO LIMITADO
                 </div>
               </div>
 
               <div className="space-y-4 mb-12 w-full text-left">
                 {[
                   { text: "Tudo do Kit Essencial", status: "checked" },
-                  { text: "✨ BÔNUS EXCLUSIVO: Atividades de Leitura Fluente (1º ao 5º ano)", status: "checked" },
-                  { text: "✨ BÔNUS EXCLUSIVO: Gêneros Textuais completos — fábula, poema, notícia, carta, conto, tirinha e mais (1º ao 5º ano)", status: "checked" },
-                  { text: "Alinhado 100% à BNCC", status: "checked" },
-                  { text: "PDF editável — imprime quantas vezes quiser", status: "checked" },
-                  { text: "Acesso vitalício", status: "checked" },
+                  { text: "✨ BÔNUS: Atividades de Leitura Fluente", status: "checked" },
+                  { text: "✨ BÔNUS: Gêneros Textuais Completos", status: "checked" },
+                  { text: "Material Didático 100% BNCC", status: "checked" },
+                  { text: "PDF Pronto para Imprimir", status: "checked" },
+                  { text: "Acesso Vitalício em 1 minuto", status: "checked" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5">
-                    <div className="flex-shrink-0 mt-0.5">
-                      <div className="bg-brand-indigo text-white rounded-full p-0.5">
-                        <Check size={12} strokeWidth={4} />
-                      </div>
+                    <div className="flex-shrink-0 mt-0.5 bg-edu-purple text-white rounded-full p-0.5">
+                      <Check size={12} strokeWidth={4} />
                     </div>
                     <span className="font-bold text-[13px] md:text-sm text-slate-700">
                       {item.text}
@@ -1142,23 +1157,45 @@ export default function App() {
                 ))}
               </div>
 
+              <div className="w-full mt-auto relative z-10">
                 <motion.a 
-                href={checkoutUrl}
-                variants={pulseVariants}
-                animate="animate"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-brand-indigo hover:bg-brand-indigo/90 text-white px-4 py-3.5 md:py-4 rounded-xl font-black text-sm md:text-base shadow-md transition-all flex items-center justify-center text-center tracking-tight whitespace-nowrap"
-              >
-                Quero o Kit Premium por R$19,90 →
-              </motion.a>
-              
-              <div className="mt-6 flex items-center justify-center gap-2 text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wide">
-                 <span>🔒 Compra segura</span>
-                 <span className="text-slate-200">•</span>
-                 <span>Download imediato</span>
+                  href={checkoutUrl}
+                  variants={pulseVariants}
+                  animate="animate"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-edu-purple hover:bg-edu-purple/90 text-white px-4 py-5 md:py-6 rounded-2xl font-black shadow-[0_15px_30px_-10px_rgba(139,92,246,0.5)] transition-all flex flex-col items-center justify-center text-center"
+                >
+                  <span className="text-sm md:text-lg whitespace-nowrap">QUERO O KIT PREMIUM AGORA →</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] mt-2 opacity-70 whitespace-nowrap">Download imediato após a compra</span>
+                </motion.a>
+                
+                <div className="mt-8 flex flex-col items-center gap-4">
+                  <div className="flex items-center justify-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest pt-4 border-t border-slate-100 w-full">
+                    <Lock size={12} fill="currentColor" />
+                    Pagamento 100% Seguro e Criptografado
+                  </div>
+                </div>
               </div>
             </motion.div>
+          </div>
+
+          {/* Micro-Benefits / Trust Multiplier */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+            {[
+              { icon: ShieldCheck, title: "Compra 100% Segura", desc: "Seus dados protegidos" },
+              { icon: Zap, title: "Acesso Imediato", desc: "Receba via E-mail" },
+              { icon: Award, title: "Qualidade Garantida", desc: "Selo 100% BNCC" },
+              { icon: MessageSquare, title: "Suporte VIP", desc: "Dúvidas resolvidas" },
+            ].map((benefit, i) => (
+              <div key={i} className="flex flex-col items-center text-center p-4">
+                <div className="bg-white p-3 rounded-full shadow-sm mb-3 text-edu-green">
+                  <benefit.icon size={20} />
+                </div>
+                <h4 className="text-[11px] md:text-xs font-black uppercase tracking-widest text-slate-800 mb-1">{benefit.title}</h4>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{benefit.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
