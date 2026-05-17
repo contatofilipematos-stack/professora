@@ -276,6 +276,7 @@ export default function App() {
   }, []);
 
   const checkoutUrl = appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR");
+  const essentialUrl = appendUTMs("https://pay.lowify.com.br/checkout?product_id=tH3CLD");
 
   return (
     <div className="min-h-screen bg-soft-blue/30 font-sans text-text-dark selection:bg-edu-blue/10">
@@ -1050,8 +1051,11 @@ export default function App() {
 
               <div className="w-full mt-auto">
                 <motion.a 
-                  href={appendUTMs("https://pay.lowify.com.br/checkout?product_id=tH3CLD")}
-                  onClick={() => trackInitiateCheckout()}
+                  href={essentialUrl}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    trackInitiateCheckout(essentialUrl);
+                  }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-slate-800 hover:bg-slate-900 text-white px-4 py-4 md:py-5 rounded-xl font-black text-sm md:text-base transition-all flex items-center justify-center text-center tracking-tight"
@@ -1135,7 +1139,10 @@ export default function App() {
               <div className="w-full mt-auto relative z-10">
                 <motion.a 
                   href={checkoutUrl}
-                  onClick={() => trackInitiateCheckout()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    trackInitiateCheckout(checkoutUrl);
+                  }}
                   variants={pulseVariants}
                   animate="animate"
                   whileHover={{ scale: 1.05 }}

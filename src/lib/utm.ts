@@ -33,7 +33,7 @@ export function appendUTMs(url: string) {
   return finalUrl.toString();
 }
 
-export function trackInitiateCheckout() {
+export function trackInitiateCheckout(url?: string) {
   if (typeof window !== 'undefined') {
     try {
       // Standard Meta Pixel / UTMfy proxy
@@ -52,6 +52,10 @@ export function trackInitiateCheckout() {
       }
     } catch (e) {
       console.error('Error tracking InitiateCheckout:', e);
+    } finally {
+      if (url) {
+        window.location.href = url;
+      }
     }
   }
 }
