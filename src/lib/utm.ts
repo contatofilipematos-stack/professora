@@ -8,7 +8,6 @@ const UTM_KEYS = [
 ];
 
 export function saveUTMs() {
-  if (typeof window === "undefined") return;
   const params = new URLSearchParams(window.location.search);
 
   UTM_KEYS.forEach((key) => {
@@ -21,20 +20,15 @@ export function saveUTMs() {
 }
 
 export function appendUTMs(url: string) {
-  if (typeof window === "undefined") return url;
-  try {
-    const finalUrl = new URL(url);
+  const finalUrl = new URL(url);
 
-    UTM_KEYS.forEach((key) => {
-      const value = localStorage.getItem(key);
+  UTM_KEYS.forEach((key) => {
+    const value = localStorage.getItem(key);
 
-      if (value) {
-        finalUrl.searchParams.set(key, value);
-      }
-    });
+    if (value) {
+      finalUrl.searchParams.set(key, value);
+    }
+  });
 
-    return finalUrl.toString();
-  } catch (e) {
-    return url;
-  }
+  return finalUrl.toString();
 }
