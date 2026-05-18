@@ -1029,7 +1029,7 @@ export default function App() {
                 <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-edu-purple/70 mb-10 block">267+ ATIVIDADES + TODOS OS BÔNUS + BNCC</span>
                 
                 <div className="bg-edu-rose/5 rounded-3xl p-6 mb-8 border border-edu-rose/10 flex flex-col items-center justify-center">
-                  <p className="text-text-muted line-through font-bold text-lg mb-1">De R$80,00</p>
+                  <p className="text-text-muted line-through font-bold text-lg mb-1">De R$97,00</p>
                   <div className="flex flex-col items-center justify-center">
                     <span className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Por apenas:</span>
                     <span className="text-6xl md:text-7xl font-black text-edu-purple tracking-tighter leading-none mb-2">R$19,90</span>
