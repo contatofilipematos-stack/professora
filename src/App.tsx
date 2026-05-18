@@ -276,7 +276,6 @@ export default function App() {
   }, []);
 
   const checkoutUrl = appendUTMs("https://pay.lowify.com.br/checkout.php?product_id=ImZoQR");
-  const essentialUrl = appendUTMs("https://pay.lowify.com.br/checkout?product_id=tH3CLD");
 
   return (
     <div className="min-h-screen bg-soft-blue/30 font-sans text-text-dark selection:bg-edu-blue/10">
@@ -997,110 +996,37 @@ export default function App() {
       <section id="planos" className="py-20 md:py-32 bg-soft-blue bg-grid relative overflow-hidden">
         <WaveDivider fillColor="#fff1f2" />
         <div className="max-w-4xl mx-auto px-4 md:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20 px-4">
-            <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">Comece agora mesmo</h2>
-            <p className="text-lg md:text-xl text-text-muted font-medium italic">Invista na sua carreira e na qualidade das suas aulas com um valor simbólico.</p>
+          <div className="text-center flex flex-col items-center mb-16 md:mb-24">
+            <div className="bg-[#FFC914] text-slate-900 px-8 py-3.5 rounded-full shadow-lg mb-10 transform -rotate-1">
+               <span className="text-xs md:text-sm font-black uppercase tracking-[0.15em] flex items-center gap-2">
+                 OPORTUNIDADE DE HOJE 🎁
+               </span>
+            </div>
+            <h2 className="text-5xl md:text-8xl font-black text-[#0F172A] tracking-tighter leading-[0.9] max-w-4xl mx-auto">
+              Leve o Pack Completo
+            </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-10 max-w-3xl md:max-w-5xl mx-auto items-stretch">
-            {/* Standard Tier */}
-            <motion.div 
-               whileHover={{ y: -5 }}
-               className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-200 flex flex-col items-center text-center shadow-sm relative overflow-hidden"
-            >
-              <div className="mb-10 text-center w-full">
-                <h3 className="text-2xl md:text-3xl font-black mb-1 text-slate-800 tracking-tight">Kit Essencial</h3>
-                <span className="text-[10px] font-black uppercase tracking-[0.1em] text-slate-400 mb-8 block">O BÁSICO PARA COMEÇAR</span>
-                
-                <div className="bg-slate-50 rounded-3xl p-6 mb-8 border border-slate-100 flex flex-col items-center justify-center">
-                  <p className="text-text-muted line-through font-bold text-base mb-1">De R$50,70</p>
-                  <div className="flex flex-col items-center justify-center">
-                    <span className="text-4xl md:text-5xl font-black text-edu-rose tracking-tight leading-none mb-1">R$9,90</span>
-                    <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Pagamento Único</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4 mb-12 w-full text-left">
-                {[
-                  { text: "267+ atividades (1º ao 5º ano)", status: "checked" },
-                  { text: "PDF editável para impressão", status: "checked" },
-                  { text: "Gabarito completo (BÔNUS)", status: "checked" },
-                  { text: "Ficha de acompanhamento (BÔNUS)", status: "checked" },
-                  { text: "Acesso vitalício", status: "checked" },
-                  { text: "Leitura Fluente e Gêneros Textuais", status: "locked" },
-                ].map((item, i) => (
-                  <div key={i} className={`flex items-start gap-2.5 ${item.status === 'locked' ? 'opacity-30' : ''}`}>
-                    <div className="flex-shrink-0 mt-0.5">
-                      {item.status === 'checked' ? (
-                        <div className="bg-edu-rose/20 text-edu-rose rounded-full p-0.5">
-                          <Check size={12} strokeWidth={4} />
-                        </div>
-                      ) : (
-                        <div className="text-slate-300">
-                          <X size={14} strokeWidth={3} />
-                        </div>
-                      )}
-                    </div>
-                    <span className={`font-bold text-[13px] md:text-sm ${item.status === 'checked' ? 'text-slate-600' : 'text-slate-400'}`}>
-                      {item.text}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="w-full mt-auto">
-                <motion.a 
-                  href={essentialUrl}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    trackInitiateCheckout(essentialUrl);
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-slate-800 hover:bg-slate-900 text-white px-4 py-4 md:py-5 rounded-xl font-black text-sm md:text-base transition-all flex items-center justify-center text-center tracking-tight"
-                >
-                  QUERO O KIT ESSENCIAL →
-                </motion.a>
-                
-                <div className="mt-8 flex flex-col items-center gap-3">
-                  <div className="flex items-center justify-center gap-1.5 text-[9px] font-bold text-slate-300 uppercase tracking-widest">
-                    <Lock size={10} />
-                    Compra Segura
-                  </div>
-                </div>
-              </div>
-
-              <motion.button 
-                onClick={() => document.getElementById('offer-recommended')?.scrollIntoView({ behavior: 'smooth' })}
-                whileHover={{ scale: 1.02 }}
-                className="mt-6 w-full py-3 px-4 border border-dashed border-edu-purple/30 bg-edu-purple/5 text-edu-purple rounded-xl font-bold text-[10px] flex items-center justify-center gap-2 hover:bg-edu-purple/10 transition-colors uppercase tracking-widest"
-              >
-                <ChevronDown size={14} /> Compare com Premium <ChevronDown size={14} />
-              </motion.button>
-            </motion.div>
-
+          <div className="flex justify-center items-stretch">
             {/* Premium Tier */}
             <motion.div 
                id="offer-recommended"
                whileHover={{ y: -5 }}
-               className="bg-white rounded-[2.5rem] p-6 md:p-10 border-[4px] border-edu-purple flex flex-col items-center text-center shadow-2xl relative overflow-hidden group"
+               className="bg-white rounded-[3rem] p-8 md:p-12 border-[4px] border-edu-purple flex flex-col items-center text-center shadow-3xl relative overflow-hidden group max-w-2xl w-full"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-edu-purple/5 to-transparent pointer-events-none" />
               
-              <div className="mb-10 text-center relative z-10 w-full">
-                <div className="mb-6 w-full max-w-[280px] mx-auto transition-transform group-hover:scale-105 duration-700">
+              <div className="text-center relative z-10 w-full">
+                <div className="mb-12 w-full max-w-[320px] mx-auto transition-transform group-hover:scale-105 duration-700">
                   <img 
                     src="https://i.ibb.co/GvmX8TyT/Whats-App-Image-2026-05-16-at-11-02-47.jpg" 
-                    alt="Kit Premium Mockup" 
+                    alt="Pack Completo Mockup" 
                     className="w-full h-auto object-contain mix-blend-multiply"
                     referrerPolicy="no-referrer"
                   />
                 </div>
-                <h3 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-r from-edu-purple to-edu-rose bg-clip-text text-transparent tracking-tighter">
-                  Kit Premium
-                </h3>
-                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-edu-purple/60 mb-8 block">267+ ATIVIDADES + TODOS OS BÔNUS</span>
+                
+                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-edu-purple/70 mb-10 block">267+ ATIVIDADES + TODOS OS BÔNUS + BNCC</span>
                 
                 <div className="bg-edu-rose/5 rounded-3xl p-6 mb-8 border border-edu-rose/10 flex flex-col items-center justify-center">
                   <p className="text-text-muted line-through font-bold text-lg mb-1">De R$80,00</p>
