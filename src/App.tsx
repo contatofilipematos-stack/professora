@@ -1044,11 +1044,13 @@ export default function App() {
 
               <div className="space-y-4 mb-12 w-full text-left">
                 {[
-                  { text: "Tudo do Kit Essencial", status: "checked" },
+                  { text: "267+ Atividades Prontas (1° ao 5° ano)", status: "checked" },
+                  { text: "Material Didático 100% BNCC", status: "checked" },
+                  { text: "PDF Editável para Impressão", status: "checked" },
                   { text: "✨ BÔNUS: Atividades de Leitura Fluente", status: "checked" },
                   { text: "✨ BÔNUS: Gêneros Textuais Completos", status: "checked" },
-                  { text: "Material Didático 100% BNCC", status: "checked" },
-                  { text: "PDF Pronto para Imprimir", status: "checked" },
+                  { text: "✨ BÔNUS: Gabarito Completo de Atividades", status: "checked" },
+                  { text: "✨ BÔNUS: Ficha de Acompanhamento Escolar", status: "checked" },
                   { text: "Acesso Vitalício em 1 minuto", status: "checked" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5">
@@ -1075,7 +1077,7 @@ export default function App() {
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-edu-purple hover:bg-edu-purple/90 text-white px-4 py-5 md:py-6 rounded-2xl font-black shadow-[0_15px_30px_-10px_rgba(139,92,246,0.5)] transition-all flex flex-col items-center justify-center text-center"
                 >
-                  <span className="text-sm md:text-lg whitespace-nowrap">QUERO O KIT PREMIUM AGORA →</span>
+                  <span className="text-sm md:text-lg whitespace-nowrap uppercase">Quero o Pack Completo Agora →</span>
                   <span className="text-[9px] uppercase tracking-[0.2em] mt-2 opacity-70 whitespace-nowrap">Download imediato após a compra</span>
                 </motion.a>
                 
